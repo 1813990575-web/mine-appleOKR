@@ -2,17 +2,246 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url=./apple-design-spec.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apple OKR Design Spec</title>
-    <script>
-      window.location.replace("./apple-design-spec.html");
-    </script>
+    <title>设计规范总站</title>
+    <style>
+      :root {
+        --bg: #f3f5f8;
+        --panel: rgba(255, 255, 255, 0.8);
+        --panel-strong: rgba(255, 255, 255, 0.94);
+        --text: #111214;
+        --muted: #5b6472;
+        --line: rgba(17, 18, 20, 0.08);
+        --blue: #0071e3;
+        --shadow: 0 24px 64px rgba(15, 23, 42, 0.08);
+        --radius-xl: 30px;
+        --radius-lg: 22px;
+        --radius-md: 16px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "SF Pro Display", "SF Pro Text", "PingFang SC",
+          "Helvetica Neue", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(0, 113, 227, 0.12), transparent 28%),
+          radial-gradient(circle at top right, rgba(255, 99, 88, 0.1), transparent 24%),
+          linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        width: min(1240px, calc(100vw - 40px));
+        margin: 0 auto;
+        padding: 32px 0 64px;
+      }
+
+      .global-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 18px;
+        padding: 14px 18px;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(18px);
+        box-shadow: var(--shadow);
+      }
+
+      .global-tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.84);
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .global-tag.is-active {
+        background: rgba(0, 113, 227, 0.1);
+        border-color: rgba(0, 113, 227, 0.18);
+        color: #0a63c8;
+      }
+
+      .hero {
+        padding: 36px;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--line);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.92) 0%,
+          rgba(255, 255, 255, 0.78) 100%
+        );
+        box-shadow: var(--shadow);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.78);
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 18px 0 12px;
+        font-size: 48px;
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+      }
+
+      .hero p {
+        max-width: 900px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .module-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .module-card {
+        padding: 22px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--line);
+        background: var(--panel-strong);
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+      }
+
+      .module-card h2 {
+        margin: 0 0 10px;
+        font-size: 24px;
+        letter-spacing: -0.02em;
+      }
+
+      .module-card p {
+        margin: 0 0 14px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .card-tag {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .card-tag.apple {
+        background: rgba(255, 59, 48, 0.12);
+        color: #b42318;
+      }
+
+      .card-tag.design {
+        background: rgba(0, 113, 227, 0.12);
+        color: #0a63c8;
+      }
+
+      .module-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 16px;
+        border-radius: 999px;
+        background: #111214;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .module-link.secondary {
+        background: rgba(247, 248, 250, 0.96);
+        border: 1px solid var(--line);
+        color: var(--text);
+      }
+
+      .module-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      @media (max-width: 900px) {
+        h1 {
+          font-size: 36px;
+        }
+
+        .module-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
   </head>
   <body>
-    <p>
-      Redirecting to
-      <a href="./apple-design-spec.html">apple-design-spec.html</a>.
-    </p>
+    <main class="page">
+      <section class="global-tags" aria-label="全局内容标签">
+        <span class="global-tag is-active">总站首页</span>
+        <a class="global-tag" href="./sites/apple-spec/">苹果规范</a>
+        <a class="global-tag" href="./sites/design-md/">设计体系总览</a>
+        <span class="global-tag">平台规范库</span>
+        <span class="global-tag">组件资产库</span>
+        <span class="global-tag">待扩展主题</span>
+      </section>
+
+      <section class="hero">
+        <div class="eyebrow">Design System Hub</div>
+        <h1>设计规范总站</h1>
+        <p>
+          这个首页不再承载具体规范内容，而是作为未来所有设计资产的总导航。当前已经接入两个一级模块：一个是 Apple 官方规范采集页，一个是多品牌设计体系对比实验室。后续继续新增内容时，只需要再扩展新的模块目录和全局 tag。
+        </p>
+
+        <div class="module-grid">
+          <article class="module-card">
+            <span class="card-tag apple">苹果规范</span>
+            <h2>Apple 规范采集页</h2>
+            <p>
+              面向 Apple Human Interface Guidelines 的结构化整理，当前重点覆盖颜色、排版、图标、布局和 Materials / Glass。
+            </p>
+            <div class="module-actions">
+              <a class="module-link" href="./sites/apple-spec/">进入模块</a>
+            </div>
+          </article>
+
+          <article class="module-card">
+            <span class="card-tag design">设计体系总览</span>
+            <h2>Design MD 对比实验室</h2>
+            <p>
+              多品牌设计规范对比模块，包含颜色、字体、按钮、卡片、圆角、间距、层级等主题，适合作为品牌风格研究和设计参考库。
+            </p>
+            <div class="module-actions">
+              <a class="module-link" href="./sites/design-md/">进入模块</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
   </body>
 </html>

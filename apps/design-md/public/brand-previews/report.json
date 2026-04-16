@@ -1,0 +1,430 @@
+[
+  {
+    "id": "airbnb",
+    "url": "https://www.airbnb.com",
+    "status": "ok",
+    "finalUrl": "https://www.airbnb.com.sg/?_set_bev_on_new_domain=1775929480_EAMWI4OTcxNzlhNz&set_everest_cookie_on_new_domain=1775929480.EANTc5NGFhZGZjMjM0Zm.8aH52T9gRERTWIgS3RcAZJR6zCqFEFuLkKtR9hkTF6U",
+    "file": "airbnb.jpg"
+  },
+  {
+    "id": "apple",
+    "url": "https://www.apple.com",
+    "status": "ok",
+    "finalUrl": "https://www.apple.com/",
+    "file": "apple.jpg"
+  },
+  {
+    "id": "figma",
+    "url": "https://www.figma.com",
+    "status": "ok",
+    "finalUrl": "https://www.figma.com/",
+    "file": "figma.jpg"
+  },
+  {
+    "id": "cursor",
+    "url": "https://www.cursor.com",
+    "status": "ok",
+    "finalUrl": "https://cursor.com/",
+    "file": "cursor.jpg"
+  },
+  {
+    "id": "elevenlabs",
+    "url": "https://elevenlabs.io",
+    "status": "ok",
+    "finalUrl": "https://elevenlabs.io/",
+    "file": "elevenlabs.jpg"
+  },
+  {
+    "id": "linear",
+    "url": "https://linear.app",
+    "status": "ok",
+    "finalUrl": "https://linear.app/",
+    "file": "linear.jpg"
+  },
+  {
+    "id": "nike",
+    "url": "https://www.nike.com",
+    "status": "ok",
+    "finalUrl": "https://www.nike.com.cn/",
+    "file": "nike.jpg"
+  },
+  {
+    "id": "airtable",
+    "url": "https://www.airtable.com",
+    "status": "ok",
+    "finalUrl": "https://www.airtable.com/",
+    "file": "airtable.jpg"
+  },
+  {
+    "id": "binance-us",
+    "url": "https://www.binance.us",
+    "status": "ok",
+    "finalUrl": "https://www.binance.us/",
+    "file": "binance-us.jpg"
+  },
+  {
+    "id": "bmw",
+    "url": "https://www.bmw.com",
+    "status": "ok",
+    "finalUrl": "https://www.bmw.com/en/index.html",
+    "file": "bmw.jpg"
+  },
+  {
+    "id": "cal-com",
+    "url": "https://cal.com",
+    "status": "ok",
+    "finalUrl": "https://cal.com/",
+    "file": "cal-com.jpg"
+  },
+  {
+    "id": "claude-anthropic",
+    "url": "https://www.anthropic.com/claude",
+    "status": "ok",
+    "finalUrl": "https://claude.com/product/overview",
+    "file": "claude-anthropic.jpg"
+  },
+  {
+    "id": "clay",
+    "url": "https://www.clay.com",
+    "status": "ok",
+    "finalUrl": "https://www.clay.com/",
+    "file": "clay.jpg"
+  },
+  {
+    "id": "clickhouse",
+    "url": "https://clickhouse.com",
+    "status": "ok",
+    "finalUrl": "https://clickhouse.com/",
+    "file": "clickhouse.jpg"
+  },
+  {
+    "id": "cohere",
+    "url": "https://cohere.com",
+    "status": "ok",
+    "finalUrl": "https://cohere.com/",
+    "file": "cohere.jpg"
+  },
+  {
+    "id": "coinbase",
+    "url": "https://www.coinbase.com",
+    "status": "ok",
+    "finalUrl": "https://www.coinbase.com/en-sg",
+    "file": "coinbase.jpg"
+  },
+  {
+    "id": "expo",
+    "url": "https://expo.dev",
+    "status": "ok",
+    "finalUrl": "https://expo.dev/",
+    "file": "expo.jpg"
+  },
+  {
+    "id": "ferrari",
+    "url": "https://www.ferrari.com",
+    "status": "ok",
+    "finalUrl": "https://www.ferrari.com/en-SG",
+    "file": "ferrari.jpg"
+  },
+  {
+    "id": "framer",
+    "url": "https://www.framer.com",
+    "status": "ok",
+    "finalUrl": "https://www.framer.com/",
+    "file": "framer.jpg"
+  },
+  {
+    "id": "hashicorp",
+    "url": "https://www.hashicorp.com",
+    "status": "ok",
+    "finalUrl": "https://www.hashicorp.com/en",
+    "file": "hashicorp.jpg"
+  },
+  {
+    "id": "ibm",
+    "url": "https://www.ibm.com",
+    "status": "ok",
+    "finalUrl": "https://www.ibm.com/us-en",
+    "file": "ibm.jpg"
+  },
+  {
+    "id": "intercom",
+    "url": "https://www.intercom.com",
+    "status": "ok",
+    "finalUrl": "https://www.intercom.com/",
+    "file": "intercom.jpg"
+  },
+  {
+    "id": "kraken",
+    "url": "https://www.kraken.com",
+    "status": "ok",
+    "finalUrl": "https://www.kraken.com/",
+    "file": "kraken.jpg"
+  },
+  {
+    "id": "lamborghini",
+    "url": "https://www.lamborghini.com",
+    "status": "ok",
+    "finalUrl": "https://www.lamborghini.com/cn-en",
+    "file": "lamborghini.jpg"
+  },
+  {
+    "id": "lovable",
+    "url": "https://lovable.dev",
+    "status": "ok",
+    "finalUrl": "https://lovable.dev/",
+    "file": "lovable.jpg"
+  },
+  {
+    "id": "meta-store",
+    "url": "https://www.meta.com",
+    "status": "ok",
+    "finalUrl": "https://www.meta.com/",
+    "file": "meta-store.jpg"
+  },
+  {
+    "id": "minimax",
+    "url": "https://www.minimax.io/en",
+    "status": "ok",
+    "finalUrl": "https://www.minimax.io/",
+    "file": "minimax.jpg"
+  },
+  {
+    "id": "mintlify",
+    "url": "https://mintlify.com",
+    "status": "ok",
+    "finalUrl": "https://www.mintlify.com/",
+    "file": "mintlify.jpg"
+  },
+  {
+    "id": "miro",
+    "url": "https://miro.com",
+    "status": "ok",
+    "finalUrl": "https://miro.com/",
+    "file": "miro.jpg"
+  },
+  {
+    "id": "mistral-ai",
+    "url": "https://mistral.ai",
+    "status": "ok",
+    "finalUrl": "https://mistral.ai/",
+    "file": "mistral-ai.jpg"
+  },
+  {
+    "id": "mongodb",
+    "url": "https://www.mongodb.com",
+    "status": "ok",
+    "finalUrl": "https://www.mongodb.com/",
+    "file": "mongodb.jpg"
+  },
+  {
+    "id": "notion",
+    "url": "https://www.notion.so",
+    "status": "ok",
+    "finalUrl": "https://www.notion.com/",
+    "file": "notion.jpg"
+  },
+  {
+    "id": "nvidia",
+    "url": "https://www.nvidia.com",
+    "status": "ok",
+    "finalUrl": "https://www.nvidia.com/en-sg/",
+    "file": "nvidia.jpg"
+  },
+  {
+    "id": "ollama",
+    "url": "https://ollama.com",
+    "status": "ok",
+    "finalUrl": "https://ollama.com/",
+    "file": "ollama.jpg"
+  },
+  {
+    "id": "opencode",
+    "url": "https://opencode.ai",
+    "status": "ok",
+    "finalUrl": "https://opencode.ai/",
+    "file": "opencode.jpg"
+  },
+  {
+    "id": "pinterest",
+    "url": "https://www.pinterest.com",
+    "status": "ok",
+    "finalUrl": "https://www.pinterest.com/",
+    "file": "pinterest.jpg"
+  },
+  {
+    "id": "posthog",
+    "url": "https://posthog.com",
+    "status": "ok",
+    "finalUrl": "https://posthog.com/",
+    "file": "posthog.jpg"
+  },
+  {
+    "id": "raycast",
+    "url": "https://www.raycast.com",
+    "status": "ok",
+    "finalUrl": "https://www.raycast.com/",
+    "file": "raycast.jpg"
+  },
+  {
+    "id": "renault",
+    "url": "https://www.renault.com",
+    "status": "ok",
+    "finalUrl": "https://www.renaultgroup.com/",
+    "file": "renault.jpg"
+  },
+  {
+    "id": "replicate",
+    "url": "https://replicate.com",
+    "status": "ok",
+    "finalUrl": "https://replicate.com/",
+    "file": "replicate.jpg"
+  },
+  {
+    "id": "resend",
+    "url": "https://resend.com",
+    "status": "ok",
+    "finalUrl": "https://resend.com/",
+    "file": "resend.jpg"
+  },
+  {
+    "id": "revolut",
+    "url": "https://www.revolut.com",
+    "status": "ok",
+    "finalUrl": "https://www.revolut.com/",
+    "file": "revolut.jpg"
+  },
+  {
+    "id": "runway",
+    "url": "https://runwayml.com",
+    "status": "ok",
+    "finalUrl": "https://runwayml.com/",
+    "file": "runway.jpg"
+  },
+  {
+    "id": "sanity",
+    "url": "https://www.sanity.io",
+    "status": "ok",
+    "finalUrl": "https://www.sanity.io/",
+    "file": "sanity.jpg"
+  },
+  {
+    "id": "sentry",
+    "url": "https://sentry.io",
+    "status": "ok",
+    "finalUrl": "https://sentry.io/welcome/",
+    "file": "sentry.jpg"
+  },
+  {
+    "id": "shopify",
+    "url": "https://www.shopify.com",
+    "status": "ok",
+    "finalUrl": "https://www.shopify.com/",
+    "file": "shopify.jpg"
+  },
+  {
+    "id": "spacex",
+    "url": "https://www.spacex.com",
+    "status": "ok",
+    "finalUrl": "https://www.spacex.com/",
+    "file": "spacex.jpg"
+  },
+  {
+    "id": "spotify",
+    "url": "https://www.spotify.com",
+    "status": "ok",
+    "finalUrl": "https://open.spotify.com/",
+    "file": "spotify.jpg"
+  },
+  {
+    "id": "stripe",
+    "url": "https://stripe.com",
+    "status": "ok",
+    "finalUrl": "https://stripe.com/en-sg",
+    "file": "stripe.jpg"
+  },
+  {
+    "id": "supabase",
+    "url": "https://supabase.com",
+    "status": "ok",
+    "finalUrl": "https://supabase.com/",
+    "file": "supabase.jpg"
+  },
+  {
+    "id": "superhuman",
+    "url": "https://superhuman.com",
+    "status": "ok",
+    "finalUrl": "https://superhuman.com/",
+    "file": "superhuman.jpg"
+  },
+  {
+    "id": "tesla",
+    "url": "https://www.tesla.com",
+    "status": "ok",
+    "finalUrl": "https://www.tesla.com/",
+    "file": "tesla.jpg"
+  },
+  {
+    "id": "together-ai",
+    "url": "https://www.together.ai",
+    "status": "ok",
+    "finalUrl": "https://www.together.ai/",
+    "file": "together-ai.jpg"
+  },
+  {
+    "id": "uber",
+    "url": "https://www.uber.com",
+    "status": "ok",
+    "finalUrl": "https://www.uber.com/",
+    "file": "uber.jpg"
+  },
+  {
+    "id": "vercel",
+    "url": "https://vercel.com",
+    "status": "ok",
+    "finalUrl": "https://vercel.com/",
+    "file": "vercel.jpg"
+  },
+  {
+    "id": "voltagent",
+    "url": "https://voltagent.dev",
+    "status": "ok",
+    "finalUrl": "https://voltagent.dev/",
+    "file": "voltagent.jpg"
+  },
+  {
+    "id": "warp",
+    "url": "https://warp.dev",
+    "status": "ok",
+    "finalUrl": "https://www.warp.dev/",
+    "file": "warp.jpg"
+  },
+  {
+    "id": "webflow",
+    "url": "https://webflow.com",
+    "status": "ok",
+    "finalUrl": "https://webflow.com",
+    "file": "webflow.jpg",
+    "note": "captured via fallback mode"
+  },
+  {
+    "id": "wise",
+    "url": "https://wise.com",
+    "status": "ok",
+    "finalUrl": "https://wise.com/",
+    "file": "wise.jpg"
+  },
+  {
+    "id": "xai",
+    "url": "https://x.ai",
+    "status": "ok",
+    "finalUrl": "https://x.ai/",
+    "file": "xai.jpg"
+  },
+  {
+    "id": "zapier",
+    "url": "https://zapier.com",
+    "status": "ok",
+    "finalUrl": "https://zapier.com/",
+    "file": "zapier.jpg"
+  }
+]

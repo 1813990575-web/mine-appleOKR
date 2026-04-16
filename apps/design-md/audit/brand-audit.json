@@ -1,0 +1,1439 @@
+{
+  "summary": {
+    "byLevel": {
+      "A": 54,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "topIssues": [
+      [
+        "源文档卡片章节弱",
+        1
+      ]
+    ],
+    "topWarnings": [
+      [
+        "字体 token 含超大字号",
+        11
+      ],
+      [
+        "源文档未提供表单章节",
+        10
+      ],
+      [
+        "字体 token 含较大字号",
+        8
+      ]
+    ]
+  },
+  "results": [
+    {
+      "id": "kraken",
+      "name": "Kraken",
+      "score": 96,
+      "level": "A",
+      "issues": [
+        "源文档卡片章节弱"
+      ],
+      "warnings": [
+        "源文档未提供表单章节"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Kraken DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": false,
+        "hasFormSection": false,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 48,
+        "buttonCount": 3,
+        "cardCount": 0,
+        "layoutModel": "generated",
+        "formCount": 0
+      }
+    },
+    {
+      "id": "airtable",
+      "name": "Airtable",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Airtable DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 48,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 1
+      }
+    },
+    {
+      "id": "binance-us",
+      "name": "Binance.US",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Binance.US DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 700,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "bmw",
+      "name": "BMW",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "源文档未提供表单章节"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/BMW DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": false,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 6,
+        "maxTypographySize": 60,
+        "buttonCount": 1,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 0
+      }
+    },
+    {
+      "id": "cal-com",
+      "name": "Cal.com",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Cal.com DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 64,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "claude-anthropic",
+      "name": "Claude (Anthropic)",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Claude (Anthropic) DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 64,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "clay",
+      "name": "Clay",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Clay DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 80,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "clickhouse",
+      "name": "ClickHouse",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含较大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/ClickHouse DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 96,
+        "buttonCount": 3,
+        "cardCount": 2,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Cohere DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 72,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "coinbase",
+      "name": "Coinbase",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "源文档未提供表单章节"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Coinbase DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": false,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 80,
+        "buttonCount": 3,
+        "cardCount": 2,
+        "layoutModel": "generated",
+        "formCount": 0
+      }
+    },
+    {
+      "id": "expo",
+      "name": "Expo",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Expo DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 64,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "ferrari",
+      "name": "Ferrari",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Ferrari DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 700,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "framer",
+      "name": "Framer",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含较大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Framer DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 110,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "hashicorp",
+      "name": "HashiCorp",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/HashiCorp DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 82,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "ibm",
+      "name": "IBM",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/IBM DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 60,
+        "buttonCount": 3,
+        "cardCount": 2,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "intercom",
+      "name": "Intercom",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "源文档未提供表单章节"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Intercom DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": false,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 80,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 0
+      }
+    },
+    {
+      "id": "lamborghini",
+      "name": "Lamborghini",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Lamborghini DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 400,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 1
+      }
+    },
+    {
+      "id": "lovable",
+      "name": "Lovable",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Lovable DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 60,
+        "buttonCount": 3,
+        "cardCount": 2,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "meta-store",
+      "name": "Meta (Store)",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Meta (Store) DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 700,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "源文档未提供表单章节"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/MiniMax DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": false,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 80,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 0
+      }
+    },
+    {
+      "id": "mintlify",
+      "name": "Mintlify",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Mintlify DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 64,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 3
+      }
+    },
+    {
+      "id": "miro",
+      "name": "Miro",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Miro DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 56,
+        "buttonCount": 2,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 1
+      }
+    },
+    {
+      "id": "mistral-ai",
+      "name": "Mistral AI",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Mistral AI DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 82,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "mongodb",
+      "name": "MongoDB",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含较大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/MongoDB DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 96,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 1
+      }
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Notion DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": false
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 64,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "源文档未提供表单章节"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/NVIDIA DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": false,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 36,
+        "buttonCount": 3,
+        "cardCount": 2,
+        "layoutModel": "generated",
+        "formCount": 0
+      }
+    },
+    {
+      "id": "ollama",
+      "name": "Ollama",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Ollama DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 48,
+        "buttonCount": 3,
+        "cardCount": 2,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "opencode",
+      "name": "OpenCode",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/OpenCode DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 6,
+        "maxTypographySize": 700,
+        "buttonCount": 1,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 1
+      }
+    },
+    {
+      "id": "pinterest",
+      "name": "Pinterest",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Pinterest DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 6,
+        "maxTypographySize": 70,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "posthog",
+      "name": "PostHog",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/PostHog DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 36,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "raycast",
+      "name": "Raycast",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Raycast DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 600,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "renault",
+      "name": "Renault",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Renault DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 700,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "replicate",
+      "name": "Replicate",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含较大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Replicate DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 128,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 1
+      }
+    },
+    {
+      "id": "resend",
+      "name": "Resend",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含较大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Resend DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 96,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "revolut",
+      "name": "Revolut",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含较大字号",
+        "源文档未提供表单章节"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Revolut DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": false,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 136,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 0
+      }
+    },
+    {
+      "id": "runway",
+      "name": "Runway",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Runway DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 48,
+        "buttonCount": 1,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 1
+      }
+    },
+    {
+      "id": "sanity",
+      "name": "Sanity",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含较大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Sanity DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 112,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "sentry",
+      "name": "Sentry",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Sentry DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 88,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Shopify DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 750,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "spacex",
+      "name": "SpaceX",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/SpaceX DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 7,
+        "maxTypographySize": 48,
+        "buttonCount": 1,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 1
+      }
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Spotify DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 24,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Stripe DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 56,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "源文档未提供表单章节"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Supabase DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": false,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 72,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 0
+      }
+    },
+    {
+      "id": "superhuman",
+      "name": "Superhuman",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Superhuman DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 64,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "tesla",
+      "name": "Tesla",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Tesla DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 500,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 1
+      }
+    },
+    {
+      "id": "together-ai",
+      "name": "Together AI",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Together AI DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 64,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 1
+      }
+    },
+    {
+      "id": "uber",
+      "name": "Uber",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Uber DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 52,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Vercel DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 48,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "voltagent",
+      "name": "VoltAgent",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/VoltAgent DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 60,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "warp",
+      "name": "Warp",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Warp DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 80,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "webflow",
+      "name": "Webflow",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号",
+        "源文档未提供表单章节"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Webflow DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": false,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": false
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 600,
+        "buttonCount": 3,
+        "cardCount": 1,
+        "layoutModel": "generated",
+        "formCount": 0
+      }
+    },
+    {
+      "id": "wise",
+      "name": "Wise",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含较大字号",
+        "源文档未提供表单章节"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Wise DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": false,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 126,
+        "buttonCount": 2,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 0
+      }
+    },
+    {
+      "id": "xai",
+      "name": "xAI",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [
+        "字体 token 含超大字号"
+      ],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/xAI DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 6,
+        "maxTypographySize": 320,
+        "buttonCount": 3,
+        "cardCount": 3,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    },
+    {
+      "id": "zapier",
+      "name": "Zapier",
+      "score": 100,
+      "level": "A",
+      "issues": [],
+      "warnings": [],
+      "sourcePath": "/Users/aha/Desktop/design-md-library-remaining-renamed/Zapier DESIGN.md",
+      "sourceSignals": {
+        "hasTypographyTable": true,
+        "hasButtonSection": true,
+        "hasCardSection": true,
+        "hasFormSection": true,
+        "hasLayoutSection": true,
+        "hasResponsiveSection": true
+      },
+      "metrics": {
+        "typographyCount": 8,
+        "maxTypographySize": 80,
+        "buttonCount": 3,
+        "cardCount": 2,
+        "layoutModel": "generated",
+        "formCount": 2
+      }
+    }
+  ]
+}

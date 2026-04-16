@@ -68,6 +68,47 @@
         padding: 36px 0 64px;
       }
 
+      .global-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 18px;
+        padding: 14px 18px;
+        border-radius: var(--radius-xl);
+        border: 1px solid rgba(255, 59, 48, 0.22);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.96) 0%,
+          rgba(255, 248, 247, 0.94) 100%
+        );
+        box-shadow: 0 18px 40px rgba(255, 59, 48, 0.12);
+      }
+
+      .global-tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(255, 255, 255, 0.82);
+        color: var(--text-secondary);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .global-tag.is-active {
+        border-color: rgba(255, 59, 48, 0.26);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 99, 88, 0.18) 0%,
+          rgba(255, 59, 48, 0.12) 100%
+        );
+        color: #b42318;
+        box-shadow: inset 0 0 0 1px rgba(255, 59, 48, 0.08);
+      }
+
       .page-shell {
         display: grid;
         grid-template-columns: 260px minmax(0, 1fr);
@@ -1040,6 +1081,14 @@
   </head>
   <body>
     <main class="page">
+      <section class="global-tags" aria-label="全局内容标签">
+        <a class="global-tag" href="../../">总站首页</a>
+        <span class="global-tag is-active">苹果规范</span>
+        <a class="global-tag" href="../design-md/">设计体系总览</a>
+        <span class="global-tag">平台规范库</span>
+        <span class="global-tag">组件资产库</span>
+        <span class="global-tag">待扩展主题</span>
+      </section>
       <div class="page-shell">
         <aside class="toc">
           <div class="toc-title">目录</div>
@@ -1074,6 +1123,15 @@
                 <a href="#typography-pick">先决定用哪种字体</a>
                 <a href="#typography-scale">字号与字重速查</a>
                 <a href="#typography-platform">平台落地方式</a>
+              </div>
+            </details>
+            <details open>
+              <summary>Materials / Glass</summary>
+              <div class="toc-group toc-sub">
+                <a href="#materials-overview">Materials / Glass 落地补充</a>
+                <a href="#materials-links">官方查阅入口</a>
+                <a href="#materials-principles">规范提炼</a>
+                <a href="#materials-implementation">开发实现映射</a>
               </div>
             </details>
             <details open>
@@ -2340,6 +2398,210 @@
                   <td class="mono">layout.bottom-critical-actions</td>
                   <td>桌面端关键动作不能只放窗口底部，必须在顶部或稳定可见区域提供入口。</td>
                   <td>来自 macOS 平台注意事项。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="materials-overview">
+        <h2>Materials / Glass 落地补充</h2>
+        <p class="section-intro">
+          这一章把 Apple 官方关于材质、玻璃、vibrancy、scroll edge effect 的公开资料整理成可复用底稿。它的目标不是伪造一套 Apple token，而是先明确哪些规则可以直接写进我们的设计规范，哪些地方必须保留成“语义层”。
+        </p>
+
+        <div class="subsection" id="materials-links">
+          <h3>先去哪里查</h3>
+          <p>
+            下面这些是后续继续扩充这章时最值得优先打开的 Apple 官方入口。以后无论是你自己还是别的 AI，要补玻璃材质，都应该先从这里开始，而不是重新搜索零散关键词。
+          </p>
+          <div class="grid">
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/materials" target="_blank" rel="noreferrer">Materials</a></strong>
+              <span>总入口。定义材质的层次作用、Liquid Glass 与 standard materials 的分工、平台差异、颜色与资源链接。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/color#Liquid-Glass-color" target="_blank" rel="noreferrer">Liquid Glass color</a></strong>
+              <span>看玻璃材质与颜色的官方关系。Apple 更强调系统适配与可读性，而不是固定一层手工着色。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/scroll-views#Scroll-edge-effects" target="_blank" rel="noreferrer">Scroll edge effects</a></strong>
+              <span>看内容区与浮层控制区之间的可变模糊边界，尤其适合工具栏、侧边栏和 pinned header。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/appkit/nsvisualeffectview" target="_blank" rel="noreferrer">NSVisualEffectView</a></strong>
+              <span>macOS 开发实现主入口。能直接看到 material、blendingMode、state、maskImage、vibrancy 等能力。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/technologyoverviews/adopting-liquid-glass" target="_blank" rel="noreferrer">Adopting Liquid Glass</a></strong>
+              <span>看 Apple 如何把 Liquid Glass 当作跨平台设计语言引入，适合补“整体设计方向”和新系统行为。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/swiftui/applying-liquid-glass-to-custom-views" target="_blank" rel="noreferrer">Applying Liquid Glass to custom views</a></strong>
+              <span>看自定义组件何时该用 Liquid Glass、何时不该用，以及自定义实现时的系统推荐边界。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="materials-principles">
+          <h3>可以直接写进规范的内容</h3>
+          <p>
+            下面这些不是猜测，而是 Apple 官方资料已经明确给出的方向。我把它们整理成更适合我们后续复用和提示 AI 的写法。
+          </p>
+          <div class="spec-grid">
+            <article class="spec-card">
+              <h4>层次分工</h4>
+              <p>Apple 明确把材质分成两个层级：Liquid Glass 和 standard materials。前者服务控制与导航层，后者服务内容层内部的结构区分。</p>
+              <div class="token-list">
+                <div class="token-row">
+                  <div class="token-label">Liquid Glass</div>
+                  <div>用于 tab bar、toolbar、sidebar 这类浮在内容之上的功能层，让内容从下方透出，同时维持控件可读性。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">Standard Materials</div>
+                  <div>用于内容层内部的分区、背景和层次，不承担“悬浮控制层”的角色。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">禁止误用</div>
+                  <div>不要把 Liquid Glass 铺到整个内容层。官方明确说它不适合做内容背景，除非是像 slider、toggle 这种瞬时交互元素。</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card">
+              <h4>玻璃变体与背景处理</h4>
+              <p>Apple 已经给出了 Liquid Glass 的两种主要变体，以及何时要额外加暗层来保障对比度。</p>
+              <div class="token-list">
+                <div class="token-row">
+                  <div class="token-label">Regular</div>
+                  <div>模糊并调整背景亮度，优先保障文字和前景的可读性。适合 alerts、sidebars、popovers 等文字较多的浮层。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">Clear</div>
+                  <div>更透明，优先保留背景内容的视觉细节。适合照片、视频等富媒体背景上的浮层组件。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">亮背景补救</div>
+                  <div>Apple 明确建议：如果 clear glass 下方内容偏亮，可在组件后方增加一层 35% opacity 的深色 dimming layer。</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card">
+              <h4>颜色、光感与可读性</h4>
+              <p>Apple 公开的是“适应式玻璃”而不是固定色值玻璃。重点不在手工指定某个玻璃颜色，而在系统如何根据背景、对比度和设置自动调节。</p>
+              <div class="token-list">
+                <div class="token-row">
+                  <div class="token-label">颜色原则</div>
+                  <div>不要按玻璃看起来偏冷、偏暖就去选材质；官方明确要求按语义用途选材质，不按表面色相选。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">前景颜色</div>
+                  <div>材质之上的文字和图标优先使用系统 vibrant colors / label colors，而不是手工挑一组低对比灰色。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">光感结论</div>
+                  <div>官方更强调玻璃会随背景亮度、系统设置、甚至 visionOS 周围环境自动适配；没有公开统一的固定光源角度或高光参数。</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card">
+              <h4>滚动边界与过渡</h4>
+              <p>Apple 把 scroll edge effect 定义成内容区和浮层控制区之间的可变 blur 过渡，而不是普通装饰性遮罩。</p>
+              <div class="token-list">
+                <div class="token-row">
+                  <div class="token-label">效果用途</div>
+                  <div>只在 scroll view 紧邻浮动控件时使用，用来说明 controls 和 content 的交界，而不是用来“做氛围”。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">Soft / Hard</div>
+                  <div>soft 更适合 iOS / iPadOS 的一般工具栏过渡；hard 主要用于 macOS，需要更强边界和更高可读性时再用。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">布局约束</div>
+                  <div>一个视图只用一个 scroll edge effect；多 pane 时每个 pane 可各自拥有，但高度应保持一致，避免边界错位。</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="note-callout">
+            这部分对以后给别的 AI 写提示词尤其重要：如果你要它“做 Apple 玻璃质感”，不要只说 blur 和半透明。更准确的说法应该是：
+            “把玻璃视作功能层与内容层之间的适应式材质；优先保证可读性和层次，不要把 Liquid Glass 滥用为内容背景；背景复杂时考虑 dimming；前景元素优先用系统 label / vibrant color 语义。”
+          </div>
+
+          <p class="footnote">
+            明确推断：这里“适应式材质”是我根据 Apple 官方对背景亮度、系统设置、vibrancy、scroll edge effect 的描述做的归纳。它不是 Apple 的原词 token，但能更准确指导后续设计和 AI 提示。
+          </p>
+        </div>
+
+        <div class="subsection" id="materials-implementation">
+          <h3>开发实现映射</h3>
+          <p>
+            如果后续不仅要做设计稿，还要把玻璃语义落实到原生实现，这里是最值得直接查看的 API 入口。我把它们按“作用”重新整理了。
+          </p>
+          <div class="grid">
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/swiftui/material" target="_blank" rel="noreferrer">SwiftUI Material</a></strong>
+              <span>standard materials 的 SwiftUI 入口，适合映射 thin / regular / thick 这类内容层材质。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/swiftui/view/glasseffect(_:in:)" target="_blank" rel="noreferrer">glassEffect(_:in:)</a></strong>
+              <span>Liquid Glass 的 SwiftUI 入口，适合自定义控件或容器浮层。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/appkit/nsvisualeffectview/material-swift.property" target="_blank" rel="noreferrer">NSVisualEffectView.material</a></strong>
+              <span>指定 macOS 视觉效果视图所用材质，适合 sidebar、HUD、popover 等语义背景。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/appkit/nsvisualeffectview/blendingmode-swift.property" target="_blank" rel="noreferrer">NSVisualEffectView.blendingMode</a></strong>
+              <span>决定是 in-window 还是 behind-window：toolbar 倾向 in-window，sheet / popover 倾向 behind-window。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/uikit/uivibrancyeffect" target="_blank" rel="noreferrer">UIVibrancyEffect</a></strong>
+              <span>iOS / iPadOS 的 vibrancy 实现入口。重点不是“加一层滤镜”，而是提升材质上前景内容的可见性。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/swiftui/scrolledgeeffectstyle" target="_blank" rel="noreferrer">ScrollEdgeEffectStyle</a></strong>
+              <span>软硬两种 scroll edge effect 的 SwiftUI 入口，适合控制内容区与 toolbar / pinned 区域的边界。</span>
+            </div>
+          </div>
+          <div class="table-wrap" style="margin-top: 16px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>我们规范里的字段</th>
+                  <th>建议写法</th>
+                  <th>官方落地线索</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mono">materials.layer-role</td>
+                  <td>区分 controls / navigation 浮层 与 content 层，不把两者混成同一种玻璃背景。</td>
+                  <td>Materials 对 Liquid Glass 与 standard materials 的分工。</td>
+                </tr>
+                <tr>
+                  <td class="mono">materials.variant</td>
+                  <td>优先声明 regular / clear 的使用条件，再决定组件如何表现，而不是先画效果图。</td>
+                  <td>Materials 对 Liquid Glass variants 的说明。</td>
+                </tr>
+                <tr>
+                  <td class="mono">materials.foreground-contrast</td>
+                  <td>玻璃上的文本、图标、填充优先使用系统 vibrancy / label 语义色，不手工猜测灰阶。</td>
+                  <td>Materials 与 NSVisualEffectView 对 vibrancy / label colors 的说明。</td>
+                </tr>
+                <tr>
+                  <td class="mono">materials.scroll-boundary</td>
+                  <td>滚动区与浮动控件之间优先用 scroll edge effect 建立边界，不用装饰性 overlay 假装模糊。</td>
+                  <td>Scroll views 对 scroll edge effect 的说明。</td>
+                </tr>
+                <tr>
+                  <td class="mono">materials.unknown-tokens</td>
+                  <td>官方未公开固定 blur radius、边框 alpha、统一高光参数、固定光源方向；这部分必须由我们自建。</td>
+                  <td>当前公开资料只给语义和行为，没有给完整参数表。</td>
                 </tr>
               </tbody>
             </table>

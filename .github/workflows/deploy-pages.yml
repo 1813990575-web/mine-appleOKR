@@ -25,13 +25,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: apps/design-md/package-lock.json
+
+      - name: Install design-md dependencies
+        run: npm ci
+        working-directory: apps/design-md
+
+      - name: Build design-md
+        run: npm run build
+        working-directory: apps/design-md
+
+      - name: Prepare Pages artifact
+        run: |
+          rm -rf .site
+          mkdir -p .site
+          cp index.html .site/index.html
+          cp -R sites .site/sites
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: .site
 
       - name: Deploy to GitHub Pages
         id: deployment

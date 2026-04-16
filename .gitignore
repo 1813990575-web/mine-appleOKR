@@ -1,0 +1,9 @@
+.DS_Store
+
+# Local dependencies and transient build output
+apps/**/node_modules/
+apps/**/dist/
+
+# Local preview and audit artifacts
+apps/**/audit-shots/
+apps/**/tmp-*.png
