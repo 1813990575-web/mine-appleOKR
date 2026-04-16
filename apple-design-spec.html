@@ -1,0 +1,3009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apple 设计规范采集页</title>
+    <style>
+      :root {
+        --page-bg: #f4f5f7;
+        --panel-bg: rgba(255, 255, 255, 0.86);
+        --panel-strong: rgba(255, 255, 255, 0.96);
+        --text-primary: #111214;
+        --text-secondary: #4b5563;
+        --text-muted: #6b7280;
+        --border-subtle: rgba(17, 18, 20, 0.08);
+        --border-strong: rgba(17, 18, 20, 0.14);
+        --blue: #0071e3;
+        --green: #1f9d55;
+        --amber: #b7791f;
+        --red: #c53030;
+        --shadow-lg: 0 24px 64px rgba(15, 23, 42, 0.08);
+        --shadow-sm: 0 10px 24px rgba(15, 23, 42, 0.06);
+        --radius-xl: 28px;
+        --radius-lg: 20px;
+        --radius-md: 14px;
+        --radius-sm: 10px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 20px;
+        --space-6: 24px;
+        --space-8: 32px;
+        --content-width: 1240px;
+        --font-stack: "SF Pro Display", "SF Pro Text", "PingFang SC",
+          "Helvetica Neue", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-stack);
+        background:
+          radial-gradient(circle at top left, rgba(0, 113, 227, 0.12), transparent 28%),
+          radial-gradient(circle at top right, rgba(52, 199, 89, 0.12), transparent 24%),
+          linear-gradient(180deg, #f9fafb 0%, var(--page-bg) 100%);
+        color: var(--text-primary);
+      }
+
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .page {
+        width: min(calc(100% - 40px), var(--content-width));
+        margin: 0 auto;
+        padding: 36px 0 64px;
+      }
+
+      .page-shell {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .content {
+        min-width: 0;
+      }
+
+      .toc {
+        position: sticky;
+        top: 24px;
+        padding: 18px 16px;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border-subtle);
+        background: rgba(255, 255, 255, 0.86);
+        box-shadow: var(--shadow-sm);
+        backdrop-filter: blur(18px);
+        max-height: calc(100vh - 48px);
+        overflow: auto;
+      }
+
+      .toc-title {
+        margin: 0 0 14px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      .toc details {
+        margin-bottom: 6px;
+      }
+
+      .toc summary {
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 8px 10px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .toc summary::after {
+        content: "▾";
+        font-size: 12px;
+        color: var(--text-muted);
+        transition: transform 160ms ease;
+      }
+
+      .toc details:not([open]) summary::after {
+        transform: rotate(-90deg);
+      }
+
+      .toc summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .toc summary:hover,
+      .toc a:hover {
+        background: rgba(0, 113, 227, 0.08);
+        text-decoration: none;
+      }
+
+      .toc-group {
+        display: grid;
+        gap: 4px;
+        margin-top: 6px;
+        padding-left: 10px;
+      }
+
+      .toc a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 10px;
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+
+      .toc-sub a {
+        font-size: 13px;
+        padding-left: 18px;
+      }
+
+      .hero {
+        padding: 36px;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.92) 0%,
+          rgba(255, 255, 255, 0.78) 100%
+        );
+        box-shadow: var(--shadow-lg);
+        backdrop-filter: blur(18px);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        border: 1px solid var(--border-subtle);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      h1 {
+        margin: 18px 0 12px;
+        font-size: 44px;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+      }
+
+      .hero p {
+        max-width: 880px;
+        margin: 0;
+        font-size: 17px;
+        line-height: 1.7;
+        color: var(--text-secondary);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-4);
+        margin-top: 28px;
+      }
+
+      .hero-card {
+        padding: 18px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        background: rgba(255, 255, 255, 0.76);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .hero-card strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 15px;
+      }
+
+      .hero-card span {
+        color: var(--text-muted);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .section {
+        margin-top: 28px;
+        padding: 28px;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border-subtle);
+        background: var(--panel-bg);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .section h2 {
+        margin: 0 0 10px;
+        font-size: 28px;
+        letter-spacing: -0.02em;
+      }
+
+      .section-intro {
+        margin: 0 0 20px;
+        color: var(--text-secondary);
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        border: 1px solid var(--border-subtle);
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .status-available {
+        background: rgba(31, 157, 85, 0.14);
+        color: #10643d;
+      }
+
+      .status-partial {
+        background: rgba(183, 121, 31, 0.14);
+        color: #8a5a15;
+      }
+
+      .status-missing {
+        background: rgba(197, 48, 48, 0.12);
+        color: #912525;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-4);
+      }
+
+      .card {
+        padding: 22px;
+        border-radius: var(--radius-lg);
+        background: var(--panel-strong);
+        border: 1px solid var(--border-subtle);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-4);
+        align-items: flex-start;
+        margin-bottom: 14px;
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 20px;
+        letter-spacing: -0.01em;
+      }
+
+      .tag {
+        flex-shrink: 0;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .card p {
+        margin: 0 0 14px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      .block-title {
+        margin: 18px 0 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      li {
+        margin: 6px 0;
+        color: var(--text-secondary);
+        line-height: 1.65;
+      }
+
+      .links {
+        display: grid;
+        gap: 8px;
+      }
+
+      .link-card {
+        padding: 12px 14px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-subtle);
+        background: rgba(247, 248, 250, 0.92);
+      }
+
+      .link-card strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      .link-card span {
+        color: var(--text-muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+      }
+
+      .subsection {
+        margin-top: 22px;
+      }
+
+      .subsection h3 {
+        margin: 0 0 8px;
+        font-size: 22px;
+        letter-spacing: -0.01em;
+      }
+
+      .subsection p {
+        margin: 0 0 14px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      .swatch-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .name-cell {
+        display: grid;
+        gap: 6px;
+      }
+
+      .inline-desc {
+        padding-left: 28px;
+        color: var(--text-muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .swatch {
+        width: 18px;
+        height: 18px;
+        border-radius: 6px;
+        flex-shrink: 0;
+        border: 1px solid rgba(17, 18, 20, 0.08);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+      }
+
+      .mono {
+        font-family: "SF Mono", "SFMono-Regular", Menlo, monospace;
+        font-size: 13px;
+      }
+
+      .value-stack {
+        display: grid;
+        gap: 4px;
+      }
+
+      .color-chip {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        gap: 12px;
+        align-items: center;
+        padding: 8px 10px;
+        border-radius: 14px;
+        cursor: pointer;
+        transition:
+          transform 140ms ease,
+          box-shadow 140ms ease,
+          border-color 140ms ease;
+      }
+
+      .color-chip .swatch {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+      }
+
+      .color-chip:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+      }
+
+      .color-chip:focus-visible {
+        outline: 2px solid rgba(0, 113, 227, 0.34);
+        outline-offset: 2px;
+      }
+
+      .color-chip.copied {
+        box-shadow: 0 0 0 2px rgba(31, 157, 85, 0.18);
+      }
+
+      .raw-palette-table td:nth-child(3) .color-chip,
+      .raw-palette-table td:nth-child(5) .color-chip,
+      .accent-table td:nth-child(3) .color-chip,
+      .accent-table td:nth-child(5) .color-chip,
+      .semantic-text-table td:nth-child(3) .color-chip,
+      .semantic-text-table td:nth-child(5) .color-chip,
+      .semantic-fill-table td:nth-child(3) .color-chip,
+      .semantic-fill-table td:nth-child(5) .color-chip {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 246, 249, 0.96) 100%);
+        border: 1px solid rgba(17, 18, 20, 0.08);
+      }
+
+      .raw-palette-table td:nth-child(4) .color-chip,
+      .raw-palette-table td:nth-child(6) .color-chip,
+      .accent-table td:nth-child(4) .color-chip,
+      .accent-table td:nth-child(6) .color-chip,
+      .semantic-text-table td:nth-child(4) .color-chip,
+      .semantic-text-table td:nth-child(6) .color-chip,
+      .semantic-fill-table td:nth-child(4) .color-chip {
+        background:
+          linear-gradient(180deg, rgba(44, 44, 46, 0.96) 0%, rgba(28, 28, 30, 0.96) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .semantic-fill-table td:nth-child(6) .color-chip {
+        background:
+          linear-gradient(180deg, rgba(44, 44, 46, 0.96) 0%, rgba(28, 28, 30, 0.96) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .raw-palette-table td:nth-child(4) .mono,
+      .raw-palette-table td:nth-child(6) .mono,
+      .accent-table td:nth-child(4) .mono,
+      .accent-table td:nth-child(6) .mono,
+      .semantic-text-table td:nth-child(4) .mono,
+      .semantic-text-table td:nth-child(6) .mono,
+      .semantic-fill-table td:nth-child(4) .mono {
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .semantic-fill-table td:nth-child(6) .mono {
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .tone-note {
+        color: var(--text-muted);
+        font-size: 11px;
+      }
+
+      .raw-palette-table td:nth-child(6) .tone-note,
+      .accent-table td:nth-child(6) .tone-note,
+      .semantic-text-table td:nth-child(6) .tone-note,
+      .semantic-fill-table td:nth-child(6) .tone-note {
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .copy-toast {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        background: rgba(17, 18, 20, 0.92);
+        color: rgba(255, 255, 255, 0.94);
+        font-size: 13px;
+        line-height: 1.45;
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+        transition:
+          opacity 180ms ease,
+          transform 180ms ease;
+        z-index: 999;
+      }
+
+      .copy-toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .accent-table th:last-child,
+      .accent-table td:last-child,
+      .semantic-text-table th:last-child,
+      .semantic-text-table td:last-child,
+      .semantic-fill-table th:last-child,
+      .semantic-fill-table td:last-child {
+        display: none;
+      }
+
+      .note-callout {
+        margin-top: 16px;
+        padding: 16px 18px;
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(183, 121, 31, 0.2);
+        background: rgba(183, 121, 31, 0.06);
+        color: #744b11;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      table {
+        width: max-content;
+        min-width: 100%;
+        border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      th,
+      td {
+        min-width: 168px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border-subtle);
+        text-align: left;
+        vertical-align: top;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      th:first-child,
+      td:first-child {
+        min-width: 180px;
+      }
+
+      th {
+        font-size: 13px;
+        color: var(--text-muted);
+        background: rgba(247, 248, 250, 0.95);
+      }
+
+      .footnote {
+        margin-top: 16px;
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.65;
+      }
+
+      .spec-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-4);
+      }
+
+      .spec-card {
+        padding: 18px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .spec-card h4 {
+        margin: 0 0 10px;
+        font-size: 17px;
+        letter-spacing: -0.01em;
+      }
+
+      .spec-card p {
+        margin: 0 0 12px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      .token-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .token-row {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 12px;
+        align-items: start;
+        padding: 10px 12px;
+        border-radius: var(--radius-md);
+        background: rgba(247, 248, 250, 0.92);
+        border: 1px solid rgba(17, 18, 20, 0.06);
+      }
+
+      .token-label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      .spec-note {
+        margin-top: 10px;
+        color: var(--text-muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .type-role {
+        display: grid;
+        gap: 6px;
+      }
+
+      .type-role strong {
+        font-size: 15px;
+      }
+
+      .type-helper {
+        color: var(--text-muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .tracking-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(0, 113, 227, 0.08);
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .type-token-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .type-token {
+        padding: 14px 16px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-subtle);
+        background: rgba(247, 248, 250, 0.92);
+      }
+
+      .type-token strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      .type-token span {
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-4);
+      }
+
+      .icon-rule-list,
+      .icon-tree {
+        display: grid;
+        gap: 10px;
+      }
+
+      .icon-tree-item {
+        padding: 12px 14px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-subtle);
+        background: rgba(247, 248, 250, 0.92);
+      }
+
+      .icon-tree-item strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      .gallery-section {
+        margin-top: 18px;
+      }
+
+      .gallery-section h4 {
+        margin: 0 0 10px;
+        font-size: 16px;
+      }
+
+      .symbol-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .symbol-card {
+        padding: 14px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-subtle);
+        background: rgba(255, 255, 255, 0.94);
+      }
+
+      .symbol-card img {
+        display: block;
+        width: 72px;
+        height: 72px;
+        margin-bottom: 10px;
+        border-radius: 18px;
+      }
+
+      .symbol-card strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      .symbol-card span {
+        display: block;
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .icon-compact-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: var(--space-4);
+        align-items: start;
+      }
+
+      .mini-rule-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .mini-rule {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(247, 248, 250, 0.92);
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .mini-rule .hint {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: rgba(0, 113, 227, 0.1);
+        color: var(--blue);
+        font-size: 11px;
+        font-weight: 700;
+        cursor: help;
+      }
+
+      .mini-rule .tooltip {
+        position: absolute;
+        left: 0;
+        top: calc(100% + 10px);
+        z-index: 20;
+        width: min(320px, 80vw);
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: var(--shadow-lg);
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.6;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(4px);
+        transition: opacity 140ms ease, transform 140ms ease;
+      }
+
+      .mini-rule:hover .tooltip,
+      .mini-rule:focus-within .tooltip {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .icon-tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        margin: 16px 0 12px;
+      }
+
+      .icon-tab {
+        border: 1px solid var(--border-subtle);
+        background: rgba(247, 248, 250, 0.96);
+        color: var(--text-secondary);
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .icon-tab.is-active {
+        background: rgba(0, 113, 227, 0.1);
+        border-color: rgba(0, 113, 227, 0.22);
+        color: var(--blue);
+      }
+
+      .icon-panel {
+        display: none;
+      }
+
+      .icon-panel.is-active {
+        display: block;
+      }
+
+      .spec-tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        margin: 16px 0 12px;
+      }
+
+      .spec-tab {
+        border: 1px solid var(--border-subtle);
+        background: rgba(247, 248, 250, 0.96);
+        color: var(--text-secondary);
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .spec-tab.is-active {
+        background: rgba(0, 113, 227, 0.1);
+        border-color: rgba(0, 113, 227, 0.22);
+        color: var(--blue);
+      }
+
+      .spec-panel {
+        display: none;
+      }
+
+      .spec-panel.is-active {
+        display: block;
+      }
+
+      .type-specimen-list {
+        display: grid;
+        gap: 0;
+        margin-bottom: 18px;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.92);
+      }
+
+      .type-specimen {
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      .type-specimen:last-child {
+        border-bottom: 0;
+      }
+
+      .type-specimen-label {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(17, 18, 20, 0.06);
+        color: var(--text-muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .type-specimen-sample {
+        margin: 0;
+        color: var(--text-primary);
+      }
+
+      .type-specimen-meta {
+        margin-top: 6px;
+        color: var(--text-muted);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .type-specimen-fields {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .type-specimen-field {
+        display: grid;
+        gap: 4px;
+      }
+
+      .type-specimen-field-label {
+        color: var(--text-muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .type-specimen-field-value {
+        color: var(--text-primary);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .quick-links {
+        display: grid;
+        gap: 10px;
+      }
+
+      .quick-link {
+        padding: 12px 14px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-subtle);
+        background: rgba(247, 248, 250, 0.92);
+      }
+
+      .quick-link strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      @media (max-width: 960px) {
+        .page-shell,
+        .hero-grid,
+        .grid,
+        .spec-grid,
+        .icon-grid,
+        .icon-compact-grid,
+        .symbol-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .toc {
+          position: static;
+          max-height: none;
+        }
+
+        h1 {
+          font-size: 34px;
+        }
+
+        .type-specimen-fields {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-shell">
+        <aside class="toc">
+          <div class="toc-title">目录</div>
+          <div class="toc-group">
+            <a href="#overview">总览</a>
+            <a href="#legend">状态图例</a>
+            <a href="#chapter-map">章节清单</a>
+            <details open>
+              <summary>Color</summary>
+              <div class="toc-group toc-sub">
+                <a href="#color-overview">Color 落地表</a>
+                <a href="#color-links">相关入口</a>
+                <a href="#color-raw">Apple Raw Palette</a>
+                <a href="#color-accent">Apple Accent Colors</a>
+                <a href="#color-text">Apple Semantic Text</a>
+                <a href="#color-fill">Apple Semantic Fill / Background / Border</a>
+              </div>
+            </details>
+            <details open>
+              <summary>Layout</summary>
+              <div class="toc-group toc-sub">
+                <a href="#layout-overview">Layout 落地表</a>
+                <a href="#layout-principles">布局原则</a>
+                <a href="#layout-safe-area">Safe Area 与平台约束</a>
+                <a href="#layout-rules">Layout 约束</a>
+              </div>
+            </details>
+            <details open>
+              <summary>Typography</summary>
+              <div class="toc-group toc-sub">
+                <a href="#typography-overview">Typography 落地表</a>
+                <a href="#typography-pick">先决定用哪种字体</a>
+                <a href="#typography-scale">字号与字重速查</a>
+                <a href="#typography-platform">平台落地方式</a>
+              </div>
+            </details>
+            <details open>
+              <summary>Icons</summary>
+              <div class="toc-group toc-sub">
+                <a href="#icons-overview">Icons 落地表</a>
+                <a href="#icons-pick">快速挑选</a>
+                <a href="#icons-app-spec">App Icon</a>
+              </div>
+            </details>
+            <a href="#cards">官方内容采集卡片</a>
+            <a href="#gaps">明确缺失的 Apple 规范内容</a>
+            <a href="#next-steps">下一步建议</a>
+          </div>
+        </aside>
+        <div class="content">
+      <section class="hero" id="overview">
+        <div class="eyebrow">Apple HIG 公开内容采集页</div>
+        <h1>苹果设计规范可采集内容总览</h1>
+        <p>
+          这个页面只整理苹果官方公开文档里目前能直接拿到的内容，并明确标注哪些模块适合转成设计规范、哪些模块只有原则没有 token、哪些模块目前明显缺失。它的目的不是复刻苹果文档，而是为后续建立我们自己的可复用设计系统做资料底稿。
+        </p>
+        <div class="hero-grid">
+          <article class="hero-card">
+            <strong>可直接拿</strong>
+            <span>平台原则、颜色使用规则、字体资源、材质原则、布局指导、工具栏与搜索等具体模式页面。</span>
+          </article>
+          <article class="hero-card">
+            <strong>只能部分拿</strong>
+            <span>排版尺度、玻璃质感、系统颜色语义、组件视觉参数。苹果往往给原则和 API，不给完整 token 表。</span>
+          </article>
+          <article class="hero-card">
+            <strong>明确缺失</strong>
+            <span>可直接复用的 JSON token、完整色板数值、统一组件尺寸表、系统化圆角阴影规范。</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="legend">
+        <h2>状态图例</h2>
+        <p class="section-intro">
+          下面每个章节都会标出苹果官方资料的可采集程度。后续你如果给我补第三方规范，我会优先往“部分可采集”和“缺失”区域补。
+        </p>
+        <div class="legend">
+          <span class="pill status-available"><span class="dot" style="background: #1f9d55"></span>可直接采集</span>
+          <span class="pill status-partial"><span class="dot" style="background: #b7791f"></span>部分可采集</span>
+          <span class="pill status-missing"><span class="dot" style="background: #c53030"></span>官方明显缺失</span>
+        </div>
+      </section>
+
+      <section class="section" id="chapter-map">
+        <h2>章节清单</h2>
+        <p class="section-intro">
+          这一部分对应你后面真正要做的设计规范章节。这里先回答“苹果有没有”以及“能不能直接抽成规范”。
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>章节</th>
+                <th>苹果公开资料情况</th>
+                <th>可采集内容</th>
+                <th>缺失内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Foundations</td>
+                <td>可直接采集</td>
+                <td>HIG 总体原则、Hierarchy / Harmony / Consistency、平台设计方法。</td>
+                <td>没有面向 token 的结构化输出。</td>
+              </tr>
+              <tr>
+                <td>Color</td>
+                <td>部分可采集</td>
+                <td>颜色使用原则、系统色思路、适配外观与辅助功能的建议。</td>
+                <td>缺少完整色板数值表和一整套工程化 token。</td>
+              </tr>
+              <tr>
+                <td>Typography</td>
+                <td>部分可采集</td>
+                <td>SF Pro 系列字体、iPhone / iPadOS Dynamic Type 表、macOS built-in text styles、系统字体 API。</td>
+                <td>Apple 给的是平台文本样式表，不是跨组件 token 表；产品级命名和组件文本规范仍要自己整理。</td>
+              </tr>
+              <tr>
+                <td>Materials / Glass</td>
+                <td>部分可采集</td>
+                <td>材质用途、vibrancy、blending mode、scroll edge effect、NSVisualEffectView 方向。</td>
+                <td>缺少玻璃参数表，比如统一 blur 半径、透明度、描边值。</td>
+              </tr>
+              <tr>
+                <td>Layout</td>
+                <td>可直接采集</td>
+                <td>布局原则、safe area、阅读顺序、视觉层次、macOS 窗口注意事项。</td>
+                <td>缺少适合桌面应用的统一 spacing token 体系。</td>
+              </tr>
+              <tr>
+                <td>Icons</td>
+                <td>可直接采集</td>
+                <td>App icon、SF Symbols、图标原则、色彩空间说明。</td>
+                <td>缺少适用于一般业务组件的图标尺寸系统。</td>
+              </tr>
+              <tr>
+                <td>Components / Patterns</td>
+                <td>部分可采集</td>
+                <td>搜索栏、工具栏、按钮、滚动视图、菜单等独立页面。</td>
+                <td>组件视觉参数零散，没有统一组件 token 文档。</td>
+              </tr>
+              <tr>
+                <td>Motion / Opacity / Radius / Shadow / Layer</td>
+                <td>官方明显缺失</td>
+                <td>只在个别页面散落提到交互和层级原则。</td>
+                <td>没有完整规范，需要我们自己建立。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="color-overview">
+        <h2>Color 落地表</h2>
+        <div class="spec-grid">
+          <article class="spec-card">
+            <h4>Color 项目进度</h4>
+            <div class="token-list">
+              <div class="token-row">
+                <span class="token-label">已完成</span>
+                <span>Apple HIG `System colors` 与 `iOS, iPadOS system gray colors` 已按官方四态整理，支持点击复制 API 名称与色值。</span>
+              </div>
+              <div class="token-row">
+                <span class="token-label">当前范围</span>
+                <span>当前页面只保留已明确核到的 Apple 色彩内容，不再显示推断性占位信息。</span>
+              </div>
+              <div class="token-row">
+                <span class="token-label">下一步</span>
+                <span>后续可继续扩展 Semantic Text、Semantic Fill、AppKit 语义色和 Accessibility 相关颜色规则。</span>
+              </div>
+            </div>
+          </article>
+          <article class="spec-card">
+            <h4>当前整理原则</h4>
+            <div class="token-list">
+              <div class="token-row">
+                <span class="token-label">命名</span>
+                <span>复制与实现优先使用 API 名称；左侧展示名只负责阅读和对照。</span>
+              </div>
+              <div class="token-row">
+                <span class="token-label">来源</span>
+                <span>以 Apple 页面原表为准，优先保留四态原值与 API 命名，不混入自定义 token。</span>
+              </div>
+              <div class="token-row">
+                <span class="token-label">状态</span>
+                <span>这一章可以先作为 Color 阶段底稿固定，后续只做增量扩展。</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="subsection" id="color-links">
+          <h3>Color 相关入口</h3>
+          <p>
+            当前这张表负责“快速看值、看语义、看差异”。如果你要继续顺着这一章回到 Apple 官方去做更细的核对，下面这些入口会比在官网里重新搜索更快。
+          </p>
+          <div class="grid">
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/foundations/color/">Color</a></strong>
+              <span>Apple HIG 颜色总页。适合回看系统颜色、动态色、色彩管理与原则说明。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/uikit/standard-colors">UIKit Standard Colors</a></strong>
+              <span>继续核对 <span class="mono">systemBlue</span>、<span class="mono">systemGray2</span> 这类 UIKit adaptable colors。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/appkit/standard-colors?changes=latest_major">AppKit Standard Colors</a></strong>
+              <span>继续核对 <span class="mono">controlAccentColor</span>、<span class="mono">windowBackgroundColor</span> 等 macOS 语义色。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/SwiftUI/Color/red">SwiftUI Color</a></strong>
+              <span>SwiftUI `Color` 的系统色入口示例。对照官方四态表时最有用。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/accessibility">Accessibility</a></strong>
+              <span>继续查 Increased Contrast、可见性和色彩可访问性时，从这里往下钻最稳。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/appkit/nscolor/controltextcolor">Representative Semantic Color APIs</a></strong>
+              <span>语义色单项 API 示例入口。适合顺着单个颜色继续深入到具体文档。</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="section-intro">
+          这一章当前分成两层：第一层是 Apple 页面直接展示的原始色表，第二层是按 Apple 语义命名整理的颜色角色。现阶段只保留已经明确核到的内容，便于先把 Color 章节固定下来。
+        </p>
+
+        <div class="subsection" id="color-raw">
+          <h3>第一层：Apple Raw Palette</h3>
+          <p>
+            这一层尽量贴近苹果自己在 HIG 页面上的写法，不做用途判断。下面这张表对应你指出的
+            <span class="mono">iOS, iPadOS system gray colors</span>。它们是苹果的原始灰阶色板，不等于文字色，也不等于背景色，只是一组基础中性色。
+          </p>
+          <div class="table-wrap">
+            <table class="raw-palette-table">
+              <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>UIKit API</th>
+                  <th>默认（浅色）</th>
+                  <th>默认（深色）</th>
+                  <th>增强对比（浅色）</th>
+                  <th>增强对比（深色）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#8E8E93"></span><span>Gray</span></div><span class="inline-desc">系统灰阶 1，来自 Apple HIG 原表。</span></div></td>
+                  <td class="mono">systemGray</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#8E8E93"></span><div class="value-stack"><span class="mono">#8E8E93</span><span class="mono">R 142 G 142 B 147</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#8E8E93"></span><div class="value-stack"><span class="mono">#8E8E93</span><span class="mono">R 142 G 142 B 147</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#6C6C70"></span><div class="value-stack"><span class="mono">#6C6C70</span><span class="mono">R 108 G 108 B 112</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#AEAEB2"></span><div class="value-stack"><span class="mono">#AEAEB2</span><span class="mono">R 174 G 174 B 178</span></div></div></td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#AEAEB2"></span><span>Gray (2)</span></div><span class="inline-desc">系统灰阶 2，Apple 以 light / dark 成对展示。</span></div></td>
+                  <td class="mono">systemGray2</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#AEAEB2"></span><div class="value-stack"><span class="mono">#AEAEB2</span><span class="mono">R 174 G 174 B 178</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#636366"></span><div class="value-stack"><span class="mono">#636366</span><span class="mono">R 99 G 99 B 102</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#8E8E93"></span><div class="value-stack"><span class="mono">#8E8E93</span><span class="mono">R 142 G 142 B 147</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#7C7C80"></span><div class="value-stack"><span class="mono">#7C7C80</span><span class="mono">R 124 G 124 B 128</span></div></div></td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#C7C7CC"></span><span>Gray (3)</span></div><span class="inline-desc">系统灰阶 3，更接近浅层填充或弱描边参考。</span></div></td>
+                  <td class="mono">systemGray3</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#C7C7CC"></span><div class="value-stack"><span class="mono">#C7C7CC</span><span class="mono">R 199 G 199 B 204</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#48484A"></span><div class="value-stack"><span class="mono">#48484A</span><span class="mono">R 72 G 72 B 74</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#AEAEB2"></span><div class="value-stack"><span class="mono">#AEAEB2</span><span class="mono">R 174 G 174 B 178</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#545456"></span><div class="value-stack"><span class="mono">#545456</span><span class="mono">R 84 G 84 B 86</span></div></div></td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#D1D1D6"></span><span>Gray (4)</span></div><span class="inline-desc">系统灰阶 4，浅模式下明显更接近背景/容器层。</span></div></td>
+                  <td class="mono">systemGray4</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#D1D1D6"></span><div class="value-stack"><span class="mono">#D1D1D6</span><span class="mono">R 209 G 209 B 214</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#3A3A3C"></span><div class="value-stack"><span class="mono">#3A3A3C</span><span class="mono">R 58 G 58 B 60</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#BCBCC0"></span><div class="value-stack"><span class="mono">#BCBCC0</span><span class="mono">R 188 G 188 B 192</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#444446"></span><div class="value-stack"><span class="mono">#444446</span><span class="mono">R 68 G 68 B 70</span></div></div></td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#E5E5EA"></span><span>Gray (5)</span></div><span class="inline-desc">系统灰阶 5，常作为更弱的面填充参考。</span></div></td>
+                  <td class="mono">systemGray5</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#E5E5EA"></span><div class="value-stack"><span class="mono">#E5E5EA</span><span class="mono">R 229 G 229 B 234</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#2C2C2E"></span><div class="value-stack"><span class="mono">#2C2C2E</span><span class="mono">R 44 G 44 B 46</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#D8D8DC"></span><div class="value-stack"><span class="mono">#D8D8DC</span><span class="mono">R 216 G 216 B 220</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#363638"></span><div class="value-stack"><span class="mono">#363638</span><span class="mono">R 54 G 54 B 56</span></div></div></td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#F2F2F7"></span><span>Gray (6)</span></div><span class="inline-desc">系统灰阶 6，浅模式下最接近页面底色级别。</span></div></td>
+                  <td class="mono">systemGray6</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#F2F2F7"></span><div class="value-stack"><span class="mono">#F2F2F7</span><span class="mono">R 242 G 242 B 247</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#1C1C1E"></span><div class="value-stack"><span class="mono">#1C1C1E</span><span class="mono">R 28 G 28 B 30</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#EBEBF0"></span><div class="value-stack"><span class="mono">#EBEBF0</span><span class="mono">R 235 G 235 B 240</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#242426"></span><div class="value-stack"><span class="mono">#242426</span><span class="mono">R 36 G 36 B 38</span></div></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="subsection" id="color-accent">
+          <h3>第一层补充：System colors 系统颜色</h3>
+          <p>
+            这一组对应 Apple 页面里的 <span class="mono">System colors</span> 原表。这里直接按官方展示顺序整理，不再混入我们自己的命名体系。
+          </p>
+          <div class="table-wrap">
+            <table class="accent-table">
+              <thead>
+                <tr>
+                  <th>变量名</th>
+                  <th>SwiftUI API</th>
+                  <th>浅色</th>
+                  <th>深色</th>
+                  <th>高对比（浅色）</th>
+                  <th>高对比（深色）</th>
+                  <th>描述</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#FF383C"></span><span>red</span></div><span class="inline-desc">Apple System colors 原表中的红色四态。</span></div></td>
+                  <td class="mono">red</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FF383C"></span><div class="value-stack"><span class="mono">#FF383C</span><span class="mono">R 255 G 56 B 60</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FF4245"></span><div class="value-stack"><span class="mono">#FF4245</span><span class="mono">R 255 G 66 B 69</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#E9152D"></span><div class="value-stack"><span class="mono">#E9152D</span><span class="mono">R 233 G 21 B 45</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FF6165"></span><div class="value-stack"><span class="mono">#FF6165</span><span class="mono">R 255 G 97 B 101</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#FF8D28"></span><span>orange</span></div><span class="inline-desc">Apple System colors 原表中的橙色四态。</span></div></td>
+                  <td class="mono">orange</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FF8D28"></span><div class="value-stack"><span class="mono">#FF8D28</span><span class="mono">R 255 G 141 B 40</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FF9230"></span><div class="value-stack"><span class="mono">#FF9230</span><span class="mono">R 255 G 146 B 48</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#C55300"></span><div class="value-stack"><span class="mono">#C55300</span><span class="mono">R 197 G 83 B 0</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FFA056"></span><div class="value-stack"><span class="mono">#FFA056</span><span class="mono">R 255 G 160 B 86</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#FFCC00"></span><span>yellow</span></div><span class="inline-desc">Apple System colors 原表中的黄色四态。</span></div></td>
+                  <td class="mono">yellow</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FFCC00"></span><div class="value-stack"><span class="mono">#FFCC00</span><span class="mono">R 255 G 204 B 0</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FFD600"></span><div class="value-stack"><span class="mono">#FFD600</span><span class="mono">R 255 G 214 B 0</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#A16A00"></span><div class="value-stack"><span class="mono">#A16A00</span><span class="mono">R 161 G 106 B 0</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FEDF43"></span><div class="value-stack"><span class="mono">#FEDF43</span><span class="mono">R 254 G 223 B 67</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#34C759"></span><span>green</span></div><span class="inline-desc">Apple System colors 原表中的绿色四态。</span></div></td>
+                  <td class="mono">green</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#34C759"></span><div class="value-stack"><span class="mono">#34C759</span><span class="mono">R 52 G 199 B 89</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#30D158"></span><div class="value-stack"><span class="mono">#30D158</span><span class="mono">R 48 G 209 B 88</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#008932"></span><div class="value-stack"><span class="mono">#008932</span><span class="mono">R 0 G 137 B 50</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#4AD968"></span><div class="value-stack"><span class="mono">#4AD968</span><span class="mono">R 74 G 217 B 104</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#00C8B3"></span><span>mint</span></div><span class="inline-desc">Apple System colors 原表中的薄荷色四态。</span></div></td>
+                  <td class="mono">mint</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#00C8B3"></span><div class="value-stack"><span class="mono">#00C8B3</span><span class="mono">R 0 G 200 B 179</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#00DAC3"></span><div class="value-stack"><span class="mono">#00DAC3</span><span class="mono">R 0 G 218 B 195</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#008575"></span><div class="value-stack"><span class="mono">#008575</span><span class="mono">R 0 G 133 B 117</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#54DFCB"></span><div class="value-stack"><span class="mono">#54DFCB</span><span class="mono">R 84 G 223 B 203</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#00C3D0"></span><span>teal</span></div><span class="inline-desc">Apple System colors 原表中的青绿色四态。</span></div></td>
+                  <td class="mono">teal</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#00C3D0"></span><div class="value-stack"><span class="mono">#00C3D0</span><span class="mono">R 0 G 195 B 208</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#00D2E0"></span><div class="value-stack"><span class="mono">#00D2E0</span><span class="mono">R 0 G 210 B 224</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#008198"></span><div class="value-stack"><span class="mono">#008198</span><span class="mono">R 0 G 129 B 152</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#3BDDEC"></span><div class="value-stack"><span class="mono">#3BDDEC</span><span class="mono">R 59 G 221 B 236</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#00C0E8"></span><span>cyan</span></div><span class="inline-desc">Apple System colors 原表中的青色四态。</span></div></td>
+                  <td class="mono">cyan</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#00C0E8"></span><div class="value-stack"><span class="mono">#00C0E8</span><span class="mono">R 0 G 192 B 232</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#3CD3FE"></span><div class="value-stack"><span class="mono">#3CD3FE</span><span class="mono">R 60 G 211 B 254</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#007EAE"></span><div class="value-stack"><span class="mono">#007EAE</span><span class="mono">R 0 G 126 B 174</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#6DD9FF"></span><div class="value-stack"><span class="mono">#6DD9FF</span><span class="mono">R 109 G 217 B 255</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#0088FF"></span><span>blue</span></div><span class="inline-desc">Apple System colors 原表中的蓝色四态。</span></div></td>
+                  <td class="mono">blue</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#0088FF"></span><div class="value-stack"><span class="mono">#0088FF</span><span class="mono">R 0 G 136 B 255</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#0091FF"></span><div class="value-stack"><span class="mono">#0091FF</span><span class="mono">R 0 G 145 B 255</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#1E6EF4"></span><div class="value-stack"><span class="mono">#1E6EF4</span><span class="mono">R 30 G 110 B 244</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#5CB8FF"></span><div class="value-stack"><span class="mono">#5CB8FF</span><span class="mono">R 92 G 184 B 255</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#6155F5"></span><span>indigo</span></div><span class="inline-desc">Apple System colors 原表中的靛蓝色四态。</span></div></td>
+                  <td class="mono">indigo</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#6155F5"></span><div class="value-stack"><span class="mono">#6155F5</span><span class="mono">R 97 G 85 B 245</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#6D7CFF"></span><div class="value-stack"><span class="mono">#6D7CFF</span><span class="mono">R 109 G 124 B 255</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#564ADE"></span><div class="value-stack"><span class="mono">#564ADE</span><span class="mono">R 86 G 74 B 222</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#A7AAFF"></span><div class="value-stack"><span class="mono">#A7AAFF</span><span class="mono">R 167 G 170 B 255</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#CB30E0"></span><span>purple</span></div><span class="inline-desc">Apple System colors 原表中的紫色四态。</span></div></td>
+                  <td class="mono">purple</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#CB30E0"></span><div class="value-stack"><span class="mono">#CB30E0</span><span class="mono">R 203 G 48 B 224</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#DB34F2"></span><div class="value-stack"><span class="mono">#DB34F2</span><span class="mono">R 219 G 52 B 242</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#B02FC2"></span><div class="value-stack"><span class="mono">#B02FC2</span><span class="mono">R 176 G 47 B 194</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#EA8DFF"></span><div class="value-stack"><span class="mono">#EA8DFF</span><span class="mono">R 234 G 141 B 255</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#FF2D55"></span><span>pink</span></div><span class="inline-desc">Apple System colors 原表中的粉色四态。</span></div></td>
+                  <td class="mono">pink</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FF2D55"></span><div class="value-stack"><span class="mono">#FF2D55</span><span class="mono">R 255 G 45 B 85</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FF375F"></span><div class="value-stack"><span class="mono">#FF375F</span><span class="mono">R 255 G 55 B 95</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#E7124D"></span><div class="value-stack"><span class="mono">#E7124D</span><span class="mono">R 231 G 18 B 77</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FF8AC4"></span><div class="value-stack"><span class="mono">#FF8AC4</span><span class="mono">R 255 G 138 B 196</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#AC7F5E"></span><span>brown</span></div><span class="inline-desc">Apple System colors 原表中的布朗色四态。</span></div></td>
+                  <td class="mono">brown</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#AC7F5E"></span><div class="value-stack"><span class="mono">#AC7F5E</span><span class="mono">R 172 G 127 B 94</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#B78A66"></span><div class="value-stack"><span class="mono">#B78A66</span><span class="mono">R 183 G 138 B 102</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#956D51"></span><div class="value-stack"><span class="mono">#956D51</span><span class="mono">R 149 G 109 B 81</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#DBA679"></span><div class="value-stack"><span class="mono">#DBA679</span><span class="mono">R 219 G 166 B 121</span></div></div></td>
+                  <td>Apple 页面 System colors 四态原表。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="subsection" id="color-text">
+          <h3>第二层：Apple Semantic Text</h3>
+          <p>
+            这一层才是 Apple 的语义角色层。我的分组依据不是颜色深浅，而是 Apple API 本身的命名。如果名字是
+            <span class="mono">labelColor</span>、<span class="mono">secondaryLabelColor</span>、
+            <span class="mono">placeholderTextColor</span>，那它们就属于文字语义色。
+          </p>
+          <div class="table-wrap">
+            <table class="semantic-text-table">
+              <thead>
+                <tr>
+                  <th>变量名</th>
+                  <th>CSS 变量</th>
+                  <th>浅色</th>
+                  <th>深色</th>
+                  <th>描述</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:rgba(0,0,0,0.847)"></span><span>labelColor</span></div><span class="inline-desc">主文字色，正文和核心信息优先使用。</span></div></td>
+                  <td class="mono">--apple-label</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(0,0,0,0.847)"></span><div class="value-stack"><span class="mono">rgba(0,0,0,0.847)</span><span class="mono">#000000</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(255,255,255,0.847)"></span><div class="value-stack"><span class="mono">rgba(255,255,255,0.847)</span><span class="mono">#FFFFFF</span></div></div></td>
+                  <td>主文字色，正文和核心信息优先使用。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:rgba(0,0,0,0.498)"></span><span>secondaryLabelColor</span></div><span class="inline-desc">次级文字色，适合说明、摘要、元信息。</span></div></td>
+                  <td class="mono">--apple-label-secondary</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(0,0,0,0.498)"></span><div class="value-stack"><span class="mono">rgba(0,0,0,0.498)</span><span class="mono">#000000</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(255,255,255,0.549)"></span><div class="value-stack"><span class="mono">rgba(255,255,255,0.549)</span><span class="mono">#FFFFFF</span></div></div></td>
+                  <td>次级文字色，适合说明、摘要、元信息。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:rgba(0,0,0,0.259)"></span><span>tertiaryLabelColor</span></div><span class="inline-desc">弱文字色，适合次级提示和边角信息。</span></div></td>
+                  <td class="mono">--apple-label-tertiary</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(0,0,0,0.259)"></span><div class="value-stack"><span class="mono">rgba(0,0,0,0.259)</span><span class="mono">#000000</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(255,255,255,0.247)"></span><div class="value-stack"><span class="mono">rgba(255,255,255,0.247)</span><span class="mono">#FFFFFF</span></div></div></td>
+                  <td>弱文字色，适合次级提示和边角信息。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:rgba(0,0,0,0.098)"></span><span>quaternaryLabelColor</span></div><span class="inline-desc">非常弱的辅助文字或装饰性信息。</span></div></td>
+                  <td class="mono">--apple-label-quaternary</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(0,0,0,0.098)"></span><div class="value-stack"><span class="mono">rgba(0,0,0,0.098)</span><span class="mono">#000000</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(255,255,255,0.098)"></span><div class="value-stack"><span class="mono">rgba(255,255,255,0.098)</span><span class="mono">#FFFFFF</span></div></div></td>
+                  <td>非常弱的辅助文字或装饰性信息。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:rgba(0,0,0,0.247)"></span><span>placeholderTextColor</span></div><span class="inline-desc">输入框占位提示，强调应弱于正文。</span></div></td>
+                  <td class="mono">--apple-placeholder</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(0,0,0,0.247)"></span><div class="value-stack"><span class="mono">rgba(0,0,0,0.247)</span><span class="mono">#000000</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(255,255,255,0.247)"></span><div class="value-stack"><span class="mono">rgba(255,255,255,0.247)</span><span class="mono">#FFFFFF</span></div></div></td>
+                  <td>输入框占位提示，强调应弱于正文。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note-callout">
+            语义文字色之前看起来“没差别”，主要是因为深色列很多是半透明白，直接贴在白底上几乎看不出来。现在它们被放进深色预览底板里，显示的是更接近真实使用场景的效果。
+          </div>
+        </div>
+
+        <div class="subsection" id="color-fill">
+          <h3>第二层：Apple Semantic Fill / Background / Border</h3>
+          <p>
+            这一组同样按 Apple 的语义命名分层，而不是我主观判断。比如
+            <span class="mono">separatorColor</span> 明确是分隔线，
+            <span class="mono">windowBackgroundColor</span> 明确是窗口背景，
+            <span class="mono">controlBackgroundColor</span> 明确是控件背景，所以它们归在背景 / fill / border 语义层，而不是文字层。
+          </p>
+          <div class="table-wrap">
+            <table class="semantic-fill-table">
+              <thead>
+                <tr>
+                  <th>变量名</th>
+                  <th>CSS 变量</th>
+                  <th>浅色</th>
+                  <th>深色</th>
+                  <th>描述</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:rgba(0,0,0,0.098)"></span><span>separatorColor</span></div><span class="inline-desc">分隔线与轻描边。</span></div></td>
+                  <td class="mono">--apple-separator</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(0,0,0,0.098)"></span><div class="value-stack"><span class="mono">rgba(0,0,0,0.098)</span><span class="mono">#000000</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(255,255,255,0.098)"></span><div class="value-stack"><span class="mono">rgba(255,255,255,0.098)</span><span class="mono">#FFFFFF</span></div></div></td>
+                  <td>分隔线与轻描边。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#B3D7FF"></span><span>selectedTextBackgroundColor</span></div><span class="inline-desc">选中文本或活动选择背景。</span></div></td>
+                  <td class="mono">--apple-selected-text-bg</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#B3D7FF"></span><div class="value-stack"><span class="mono">#B3D7FF</span><span class="mono">R 179 G 215 B 255</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#3F638B"></span><div class="value-stack"><span class="mono">#3F638B</span><span class="mono">R 63 G 99 B 139</span></div></div></td>
+                  <td>选中文本或活动选择背景。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#007AFF"></span><span>controlAccentColor</span></div><span class="inline-desc">控件的强调色，接近系统选中态。</span></div></td>
+                  <td class="mono">--apple-control-accent</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#007AFF"></span><div class="value-stack"><span class="mono">#007AFF</span><span class="mono">R 0 G 122 B 255</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#007AFF"></span><div class="value-stack"><span class="mono">#007AFF</span><span class="mono">R 0 G 122 B 255</span></div></div></td>
+                  <td>控件的强调色，接近系统选中态。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#FFFFFF"></span><span>controlBackgroundColor</span></div><span class="inline-desc">输入控件、普通可交互容器背景。</span></div></td>
+                  <td class="mono">--apple-control-bg</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#FFFFFF"></span><div class="value-stack"><span class="mono">#FFFFFF</span><span class="mono">R 255 G 255 B 255</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#1E1E1E"></span><div class="value-stack"><span class="mono">#1E1E1E</span><span class="mono">R 30 G 30 B 30</span></div></div></td>
+                  <td>输入控件、普通可交互容器背景。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#ECECEC"></span><span>windowBackgroundColor</span></div><span class="inline-desc">窗口级背景，更适合大面积容器。</span></div></td>
+                  <td class="mono">--apple-window-bg</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#ECECEC"></span><div class="value-stack"><span class="mono">#ECECEC</span><span class="mono">R 236 G 236 B 236</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#323232"></span><div class="value-stack"><span class="mono">#323232</span><span class="mono">R 50 G 50 B 50</span></div></div></td>
+                  <td>窗口级背景，更适合大面积容器。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#969696"></span><span>underPageBackgroundColor</span></div><span class="inline-desc">更底层的大背景，通常不直接作为主内容卡片底色。</span></div></td>
+                  <td class="mono">--apple-under-page-bg</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:rgba(150,150,150,0.898)"></span><div class="value-stack"><span class="mono">rgba(150,150,150,0.898)</span><span class="mono">#969696</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#282828"></span><div class="value-stack"><span class="mono">#282828</span><span class="mono">R 40 G 40 B 40</span></div></div></td>
+                  <td>更底层的大背景，通常不直接作为主内容卡片底色。</td>
+                </tr>
+                <tr>
+                  <td><div class="name-cell"><div class="swatch-row"><span class="swatch" style="background:#DCDCDC"></span><span>unemphasizedSelectedContentBackgroundColor</span></div><span class="inline-desc">失焦但仍保留的选中背景。</span></div></td>
+                  <td class="mono">--apple-selection-unemphasized</td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#DCDCDC"></span><div class="value-stack"><span class="mono">#DCDCDC</span><span class="mono">R 220 G 220 B 220</span></div></div></td>
+                  <td><div class="color-chip"><span class="swatch" style="background:#464646"></span><div class="value-stack"><span class="mono">#464646</span><span class="mono">R 70 G 70 B 70</span></div></div></td>
+                  <td>失焦但仍保留的选中背景。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="note-callout">
+          现在这部分已经明确分成两层：
+          第一层是 Apple 原表，第二层才是按 Apple 命名做的语义整理。这样你后面看规范时，就不会再把
+          <span class="mono">systemGray</span> 这类原始 palette 和
+          <span class="mono">labelColor</span>、<span class="mono">windowBackgroundColor</span> 这种语义色混为一谈。
+        </div>
+      </section>
+
+      <section class="section" id="typography-overview">
+        <h2>Typography 落地表</h2>
+        <p class="section-intro">
+          这一部分不再只写“苹果公开了哪些字体资源”，而是把字体真正整理成前端和设计都能直接执行的规则。阅读顺序建议是：
+          先看“用哪种字体”，再看“字号与字重”，最后看“不同平台怎么落地”。
+        </p>
+        <div class="note-callout">
+          Apple 官方公开得最完整的是 <span class="mono">字体家族</span>、<span class="mono">系统文本样式</span> 和部分
+          <span class="mono">tracking</span> 信息，而不是一张可直接复用的组件级 token 表。下面这套内容是基于 Apple 的字体倾向做的结构化整理，目的是让你“一眼知道怎么用”，不是伪装成 Apple 原文。
+        </div>
+
+        <div class="subsection" id="typography-links">
+          <h3>Typography 相关入口</h3>
+          <p>
+            这一组链接放在章节头部，是因为它们对应的是“先去哪里看原文和资源”。如果你后面要继续人工阅读 Apple 官方内容，先从这里进最省时间。
+          </p>
+          <div class="grid">
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/typography">Typography</a></strong>
+              <span>Apple HIG 的排版总页。适合先看排版原则、可读性、Dynamic Type 和规格入口。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/fonts/">Fonts</a></strong>
+              <span>Apple 字体总入口。适合下载和核对 SF Pro、SF Mono、New York 等字体资源。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/resources/">Apple Design Resources</a></strong>
+              <span>Apple 设计资源入口。适合继续找 Dynamic Type size tables、UI Kit 和模板文件。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/">Human Interface Guidelines</a></strong>
+              <span>如果你要从 Typography 扩展到 Layout、Color、Accessibility 等关联章节，从这里回总纲最快。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="typography-pick">
+          <h3>先决定用哪种字体</h3>
+          <p>
+            苹果的字体选择核心不是“喜欢哪种字”，而是“内容密度和场景是什么”。如果你先把字体分工定清楚，后面的字号和字重基本就不会乱。
+          </p>
+          <div class="spec-grid">
+            <article class="spec-card">
+              <h4>SF Pro Text</h4>
+              <p>默认正文首选。适合信息密度高、连续阅读多、控件文本多的场景。</p>
+              <div class="type-token-list">
+                <div class="type-token">
+                  <strong>什么时候用</strong>
+                  <span>正文、列表、表单、按钮、标签、副文案、设置页说明、表格单元格。</span>
+                </div>
+                <div class="type-token">
+                  <strong>建议区间</strong>
+                  <span>优先用于 19pt 及以下的小到中号文本，保证小字号时的清晰度和节奏。</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card">
+              <h4>SF Pro Display</h4>
+              <p>用于层级更高、留白更多、需要更强视觉存在感的标题。</p>
+              <div class="type-token-list">
+                <div class="type-token">
+                  <strong>什么时候用</strong>
+                  <span>页面主标题、区块大标题、Hero 数字、空状态标题、强调型展示信息。</span>
+                </div>
+                <div class="type-token">
+                  <strong>建议区间</strong>
+                  <span>优先用于 20pt 及以上标题；Apple 官方字体家族本身就按这个分界设计。</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card">
+              <h4>SF Mono</h4>
+              <p>给“需要对齐和识别字符差异”的内容，不给普通正文。</p>
+              <div class="type-token-list">
+                <div class="type-token">
+                  <strong>什么时候用</strong>
+                  <span>代码、命令、快捷键、时间戳、版本号、日志、token 名、表格中的技术字段。</span>
+                </div>
+                <div class="type-token">
+                  <strong>不该怎么用</strong>
+                  <span>不要把它拿去做说明文案或按钮文案，否则会显得过于技术化、阅读阻力更高。</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card">
+              <h4>New York</h4>
+              <p>苹果官方衬线字体。更适合阅读型内容和带一点 editorial 气质的场景。</p>
+              <div class="type-token-list">
+                <div class="type-token">
+                  <strong>什么时候用</strong>
+                  <span>长文阅读、专题页、杂志感内容、品牌表达页面，不建议作为应用界面的默认 UI 字体。</span>
+                </div>
+                <div class="type-token">
+                  <strong>怎么控制</strong>
+                  <span>只在少量阅读区使用，和 SF Pro 明确分工，避免一个界面里两种主字体互相抢层级。</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="subsection" id="typography-scale">
+          <h3>按平台看官方字号表</h3>
+          <p>
+            这一部分现在只保留 Apple 官方能直接核对的表，不再使用我自己推断的区间。关键区别是：
+            <span class="mono">iPhone</span> 和 <span class="mono">iPadOS</span> 共用同一套
+            <span class="mono">Dynamic Type sizes</span>；
+            <span class="mono">macOS</span> 则使用单独的
+            <span class="mono">built-in text styles</span>。如果你要把规范按产品拆分，就应该按这个方式拆。
+          </p>
+          <div class="grid" style="margin-bottom: 14px">
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/typography">Typography Specifications</a></strong>
+              <span>Apple 官方 typography 总页，包含 iPhone / iPadOS Dynamic Type 表、macOS built-in text styles 和 tracking values。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/resources/">Dynamic Type Size Tables</a></strong>
+              <span>如果你要继续做 xSmall 到 xxxLarge、AX1 到 AX5 的完整可访问字号表，去 Apple Design Resources 下载设计资源最直接。</span>
+            </div>
+          </div>
+          <div class="spec-tabs" role="tablist" aria-label="Typography platforms">
+            <button class="spec-tab is-active" data-target="type-panel-iphone" role="tab" aria-selected="true">iPhone</button>
+            <button class="spec-tab" data-target="type-panel-ipad" role="tab" aria-selected="false">iPadOS</button>
+            <button class="spec-tab" data-target="type-panel-macos" role="tab" aria-selected="false">macOS</button>
+          </div>
+
+          <div id="type-panel-iphone" class="spec-panel is-active">
+            <div class="note-callout" style="margin-bottom: 16px">
+              官方表名是 <span class="mono">iOS, iPadOS Dynamic Type sizes</span>。
+              也就是说，iPhone 和 iPadOS 在 Typography 这里不是两套不同字号表，而是同一套 Dynamic Type 文本样式。
+              下面先展示默认尺寸类别 <span class="mono">Large</span>，这是最适合写进基础规范的那一列。
+            </div>
+            <div class="link-card" style="margin-bottom: 16px">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/typography">数据来源：Apple Typography / iOS, iPadOS Dynamic Type sizes</a></strong>
+              <span>这张 iPhone 表的数据直接整理自 Apple 官方 Typography 页面中的 <span class="mono">iOS, iPadOS Dynamic Type sizes</span> 表。</span>
+            </div>
+            <div class="type-specimen-list">
+              <div class="type-specimen">
+                <div class="type-specimen-label">iPhone preview</div>
+                <p class="type-specimen-sample" style="font-family:'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:34px;line-height:41px;font-weight:400;">Large Title</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">34pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">41pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">700 Bold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Display</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：手机端一级标题，不能再写成 36~40 这种区间。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:28px;line-height:34px;font-weight:400;">Title 1</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">28pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">34pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">700 Bold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Display</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：页面主标题或大区块标题。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:22px;line-height:28px;font-weight:400;">Title 2</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">22pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">28pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">700 Bold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Display</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：二级标题。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:20px;line-height:25px;font-weight:400;">Title 3</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">20pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">25pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Display</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：卡片或分组标题。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:17px;line-height:22px;font-weight:600;">Headline</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">17pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">22pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">600 Semibold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：强调正文、列表主信息。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:17px;line-height:22px;font-weight:400;">Body</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">17pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">22pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：默认正文。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:16px;line-height:21px;font-weight:400;">Callout</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">16pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">21pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：次正文、说明性文本。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:15px;line-height:20px;font-weight:400;">Subhead</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">15pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">20pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：辅助正文、密集信息。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:13px;line-height:18px;font-weight:400;">Footnote</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">13pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">18pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：脚注、元信息。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:12px;line-height:16px;font-weight:400;">Caption 1</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">12pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">16pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：弱提示、小标签。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:11px;line-height:13px;font-weight:400;">Caption 2</p>
+                <div class="type-specimen-fields">
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">11pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">13pt</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div>
+                  <div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div>
+                </div>
+                <div class="type-specimen-meta">用途：最小辅助文字。</div>
+              </div>
+            </div>
+            <p class="footnote">
+              Apple 官方这一套并不是“固定一个字号体系永远不变”，而是建立在 Dynamic Type 上。
+              也就是说，默认基线是 <span class="mono">Large</span>，但完整规范还应该知道它有
+              <span class="mono">xSmall - xxxLarge</span> 和 <span class="mono">AX1 - AX5</span> 的可访问扩展。
+            </p>
+          </div>
+
+          <div id="type-panel-ipad" class="spec-panel">
+            <div class="note-callout" style="margin-bottom: 16px">
+              这一栏和 iPhone 看起来会一样，不是我偷懒，而是 Apple 官方 Typography 页面就是把它们放在同一张
+              <span class="mono">iOS, iPadOS Dynamic Type sizes</span> 表里。
+              所以如果你文档里要拆成 “手机端 / iPad 端”，可以分标签展示，但底层基准值是同一套官方样式。
+            </div>
+            <div class="link-card" style="margin-bottom: 16px">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/typography">数据来源：Apple Typography / iOS, iPadOS Dynamic Type sizes</a></strong>
+              <span>这张 iPadOS 表的数据同样直接整理自 Apple 官方 Typography 页面中的 <span class="mono">iOS, iPadOS Dynamic Type sizes</span> 表。</span>
+            </div>
+            <div class="type-specimen-list">
+              <div class="type-specimen">
+                <div class="type-specimen-label">iPadOS preview</div>
+                <p class="type-specimen-sample" style="font-family:'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:34px;line-height:41px;font-weight:400;">Large Title</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">34pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">41pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">700 Bold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Display</div></div></div>
+                <div class="type-specimen-meta">用途：iPadOS 默认大标题，和 iPhone 共用同一套官方表。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:28px;line-height:34px;font-weight:400;">Title 1</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">28pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">34pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">700 Bold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Display</div></div></div>
+                <div class="type-specimen-meta">用途：主标题。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:22px;line-height:28px;font-weight:400;">Title 2</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">22pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">28pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">700 Bold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Display</div></div></div>
+                <div class="type-specimen-meta">用途：二级标题。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:20px;line-height:25px;font-weight:400;">Title 3</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">20pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">25pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Display</div></div></div>
+                <div class="type-specimen-meta">用途：分组或容器标题。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:17px;line-height:22px;font-weight:600;">Headline</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">17pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">22pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：强调正文、列表主信息。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:17px;line-height:22px;font-weight:400;">Body</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">17pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">22pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：默认正文。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:16px;line-height:21px;font-weight:400;">Callout</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">16pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">21pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：说明文本。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:15px;line-height:20px;font-weight:400;">Subhead</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">15pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">20pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：辅助正文。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:13px;line-height:18px;font-weight:400;">Footnote</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">13pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">18pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：脚注、元信息。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:12px;line-height:16px;font-weight:400;">Caption 1</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">12pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">16pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：小标签、弱提示。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:11px;line-height:13px;font-weight:400;">Caption 2</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">11pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">13pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：最小辅助文字。</div>
+              </div>
+            </div>
+            <p class="footnote">
+              如果后面你们要继续细分 iPadOS 的阅读型页面或多栏桌面化布局，那应该在
+              <span class="mono">同一套官方文本样式</span> 之上定义产品自己的使用规则，而不是改 Apple 这张基准表。
+            </p>
+          </div>
+
+          <div id="type-panel-macos" class="spec-panel">
+            <div class="note-callout" style="margin-bottom: 16px">
+              macOS 不是 Dynamic Type 那套表，而是单独的 <span class="mono">macOS built-in text styles</span>。
+              这也是为什么你做桌面端规范时，不能直接把 iPhone 的 34 / 28 / 22 硬搬过去。Apple 官方在同一页里还明确写了默认与最小字号：
+              <span class="mono">iOS, iPadOS 默认 17pt / 最小 11pt</span>，
+              <span class="mono">macOS 默认 13pt / 最小 10pt</span>。
+              也就是说，桌面端官方基线确实更小，这不是我们整理错了。
+            </div>
+            <div class="link-card" style="margin-bottom: 16px">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/typography">数据来源：Apple Typography / macOS built-in text styles</a></strong>
+              <span>这张 macOS 表的数据直接整理自 Apple 官方 Typography 页面中的 <span class="mono">macOS built-in text styles</span> 表。</span>
+            </div>
+            <div class="type-specimen-list">
+              <div class="type-specimen">
+                <div class="type-specimen-label">macOS preview</div>
+                <p class="type-specimen-sample" style="font-family:'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:26px;line-height:32px;font-weight:400;">Large Title</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">26pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">32pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">700 Bold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Display</div></div></div>
+                <div class="type-specimen-meta">用途：桌面端一级标题，官方不是 34pt。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:22px;line-height:26px;font-weight:400;">Title 1</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">22pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">26pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">700 Bold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Display</div></div></div>
+                <div class="type-specimen-meta">用途：主标题。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:17px;line-height:22px;font-weight:400;">Title 2</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">17pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">22pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">700 Bold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：二级标题。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:15px;line-height:20px;font-weight:400;">Title 3</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">15pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">20pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：分组、卡片、面板标题。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:13px;line-height:16px;font-weight:700;">Headline</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">13pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">16pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">700 Bold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">800 Heavy</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：强调信息、列表关键文本。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:13px;line-height:16px;font-weight:400;">Body</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">13pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">16pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：默认正文。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:12px;line-height:15px;font-weight:400;">Callout</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">12pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">15pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：说明文本、次级正文。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:11px;line-height:14px;font-weight:400;">Subheadline</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">11pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">14pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：辅助说明。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:10px;line-height:13px;font-weight:400;">Footnote</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">10pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">13pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：注释、元信息。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:10px;line-height:13px;font-weight:400;">Caption 1</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">10pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">13pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">400 Regular</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">500 Medium</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：弱提示、小标签。</div>
+              </div>
+              <div class="type-specimen">
+                <p class="type-specimen-sample" style="font-family:'SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;font-size:10px;line-height:13px;font-weight:500;">Caption 2</p>
+                <div class="type-specimen-fields"><div class="type-specimen-field"><div class="type-specimen-field-label">字号</div><div class="type-specimen-field-value">10pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">行高</div><div class="type-specimen-field-value">13pt</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字重</div><div class="type-specimen-field-value">500 Medium</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">强调字重</div><div class="type-specimen-field-value">600 Semibold</div></div><div class="type-specimen-field"><div class="type-specimen-field-label">字体</div><div class="type-specimen-field-value">SF Pro Text</div></div></div>
+                <div class="type-specimen-meta">用途：最小辅助文本。</div>
+              </div>
+            </div>
+            <p class="footnote">
+              这张表对桌面端最有价值，因为它直接说明了 macOS 的默认文本密度显著高于 iPhone / iPadOS。
+              如果你们做的是 Mac 产品，应该优先把这张表作为基线，再去定义 Toolbar、Sidebar、Table、Inspector 等组件文本规范。
+            </p>
+          </div>
+        </div>
+
+        <div class="subsection" id="typography-platform">
+          <h3>平台落地方式</h3>
+          <p>
+            Apple 真正稳定的思路不是“每个平台都硬编码某个字体文件”，而是优先使用系统文本语义。也就是说，原生端优先调系统样式，Web 再把这种语义翻译成自己的 token。
+          </p>
+          <div class="grid" style="margin-bottom: 14px">
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/uikit/uifont/preferredfont%28fortextstyle%3Acompatiblewith%3A%29?language=o_2">UIKit Preferred Font</a></strong>
+              <span>iOS / iPadOS 端继续深挖系统文本样式时，从 <span class="mono">preferredFont(forTextStyle:)</span> 开始最直接。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically/">Scaling Fonts Automatically</a></strong>
+              <span>如果你关心 Dynamic Type 和自定义字体如何跟系统字号缩放配合，这篇开发文档最值得继续看。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/appkit/nsfont/systemfont%28ofsize%3Aweight%3A%29">AppKit System Font</a></strong>
+              <span>macOS 端要继续看系统字体 API 和字重控制，先看 <span class="mono">NSFont</span> 的系统字体入口。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/documentation/swiftui/font/design">SwiftUI Font.Design</a></strong>
+              <span>如果你后面需要把默认、rounded、serif、monospaced 这些字体设计映射到 SwiftUI，这个入口最合适。</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>场景</th>
+                  <th>Apple 原生思路</th>
+                  <th>我们文档怎么写</th>
+                  <th>避免的问题</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>iOS / iPadOS</td>
+                  <td>优先使用系统文本样式和 Dynamic Type，而不是在每个页面手填一个字号。</td>
+                  <td>文档里保留 <span class="mono">large-title / title / body / caption</span> 这类语义层，再映射到具体 token。</td>
+                  <td>避免无障碍字号失效，也避免同一个角色在不同页面字号漂移。</td>
+                </tr>
+                <tr>
+                  <td>macOS</td>
+                  <td>优先使用系统字体 API 语义，例如 label、menu、title bar、toolbar 等文本角色。</td>
+                  <td>规范里按“窗口标题 / 菜单 / 工具栏 / 表格 / 说明文案”拆文本角色，不直接只写成一串字号。</td>
+                  <td>避免桌面应用控件文本和内容文本全部混成一个级别。</td>
+                </tr>
+                <tr>
+                  <td>Web / HTML</td>
+                  <td>不能完全照搬原生 API，但可以继承 Apple 的字体分工与层级逻辑。</td>
+                  <td>先定义 <span class="mono">--font-ui</span>、<span class="mono">--font-display</span>、<span class="mono">--font-mono</span>，再定义标题/正文/标签 token。</td>
+                  <td>避免每个组件自己写 font-family、font-size，最后全站失控。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="spec-grid" style="margin-top: 16px">
+            <article class="spec-card">
+              <h4>可以直接写进规范的硬规则</h4>
+              <div class="token-list">
+                <div class="token-row">
+                  <div class="token-label">Rule 1</div>
+                  <div>UI 默认字体先用 SF Pro；代码和技术信息单独切到 SF Mono；阅读型内容再考虑 New York。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">Rule 2</div>
+                  <div>标题层级主要靠字号、字重和留白建立，不靠颜色堆叠；正文层默认保持中性字重。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">Rule 3</div>
+                  <div>小字号不要过度负 tracking，12-15 这一档更应该优先保证清晰度和可扫描性。</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card">
+              <h4>建议补成我们自己的 token</h4>
+              <div class="token-list">
+                <div class="token-row">
+                  <div class="token-label">type.display.l</div>
+                  <div>34 / 40 / Semibold / SF Pro Display，用于页面第一标题。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">type.body.m</div>
+                  <div>17 / 28 / Regular / SF Pro Text，用于默认正文。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">type.label.s</div>
+                  <div>13 / 18 / Medium / SF Pro Text，用于控件和辅助标签。</div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="layout-overview">
+        <h2>Layout 落地表</h2>
+        <div class="card">
+          <div class="card-header">
+            <h3>先看这些 Apple 原文</h3>
+            <span class="tag status-available">阅读入口</span>
+          </div>
+          <p>
+            这部分真正该看的主页面不是泛泛的“Layout”目录，而是你刚给的 <span class="mono">layout-and-organization</span>。它直接在讲信息层次、分组、对齐、导航与内容的组织方式。下面这几页按重要性排序。
+          </p>
+          <div class="links">
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/layout-and-organization">Layout and Organization</a></strong>
+              <span>第一优先。看 Apple 怎么定义视觉层次、内容分组、对齐、阅读顺序，以及为什么控件不能和内容糊成一片。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/layout">Layout</a></strong>
+              <span>第二优先。看 safe area、layout guides、多设备适配和平台边界，解决“内容贴哪里”和“哪些地方不能贴”的问题。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/toolbars">Toolbars</a></strong>
+              <span>第三优先。看工具栏为什么要分 leading、center、trailing，不同层级的动作为什么不能混排。</span>
+            </div>
+            <div class="link-card">
+              <strong><a href="https://developer.apple.com/design/human-interface-guidelines/search-fields">Search fields</a></strong>
+              <span>辅助阅读。你在处理侧边栏搜索、顶部搜索或全局搜索入口时再看，帮助把抽象原则落到具体位置。</span>
+            </div>
+          </div>
+        </div>
+        <p class="section-intro">
+          这一节不再做“Apple 说了什么”的流水账，只保留真正会影响页面结构的结论：内容如何排序，控件和内容如何分层，布局如何对齐，隐藏内容如何提示，页面如何服从 safe area 和平台约束。
+        </p>
+
+        <div class="subsection" id="layout-principles">
+          <h3>布局原则 / Visual Hierarchy</h3>
+          <p>
+            Apple 在这部分最重要的不是给你一个 spacing 数表，而是给你一套判断顺序。先保证信息结构正确，再谈视觉样式；结构错了，留白和材质都救不回来。
+          </p>
+          <div class="note-callout">
+            真正需要记住的只有 5 句：
+            先让用户一眼分清“控件”和“内容”；把最重要的信息放在阅读起点；用对齐和缩进表达层级；看不完的内容必须给出继续浏览的线索；任何内容都不能无视 safe area 和平台边界。
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>规则项</th>
+                  <th>Apple 公开内容</th>
+                  <th>前端规范落地方式</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>区分控件与内容</td>
+                  <td>用户必须能立刻分辨“这是操作界面”还是“这是信息内容”。Apple 强调控制区应与内容区形成明确边界，而不是混成一整块。</td>
+                  <td>页面骨架默认拆成 <span class="mono">chrome / content</span> 两层；导航栏、工具栏、筛选区、侧栏必须有独立层次，不能直接溶进正文背景。</td>
+                </tr>
+                <tr>
+                  <td>阅读顺序</td>
+                  <td>最重要的信息和最常用的动作应该出现在阅读起点，通常是从上到下、从 leading 到 trailing；语言变化时还要兼容 RTL。</td>
+                  <td>标题、当前对象状态、主操作优先放在顶部和 leading 侧；次级说明、补充操作、低频信息再往后排，不能把关键动作埋在页面尾部。</td>
+                </tr>
+                <tr>
+                  <td>对齐与缩进</td>
+                  <td>对齐不是装饰，而是用来表达哪些东西属于同一组、哪些是从属关系；缩进用于显式展示层级。</td>
+                  <td>表格、表单、Inspector、侧边栏列表必须有稳定的对齐线；不要让标题、字段、操作区各自漂移，否则页面会失去结构感。</td>
+                </tr>
+                <tr>
+                  <td>渐进披露</td>
+                  <td>当内容无法一次性全部呈现时，必须让用户知道“后面还有”。Apple 倾向用 disclosure、滚动露出、分页或局部可见性处理复杂内容。</td>
+                  <td>折叠区、抽屉、分页列表、横向滚动区域都必须给出继续浏览的线索，不能让隐藏内容像被截断一样凭空消失。</td>
+                </tr>
+                <tr>
+                  <td>留白与分组</td>
+                  <td>空间的首要作用不是“好看”，而是分组。相关内容要靠近，不相关内容要拉开，否则用户无法快速判断一块内容是否属于同一个任务。</td>
+                  <td>在 spacing token 完整之前，先把“分组优先于堆叠”写成硬规则：每个区块只承载一个主要任务，靠标题、留白和边界建立层次。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="subsection" id="layout-safe-area">
+          <h3>Safe Area 与平台约束</h3>
+          <p>
+            这部分是最适合直接进入前端框架的内容。Apple 对 safe area、系统特征和平台限制讲得足够明确，完全可以沉成页面骨架规则。
+          </p>
+          <div class="spec-grid">
+            <article class="spec-card">
+              <h4>通用 Safe Area 语义</h4>
+              <p>安全区是视图中不会被工具栏、标签栏或设备特征遮挡的可用区域。它既处理设备开孔、圆角，也处理系统栏和窗口结构。</p>
+              <div class="token-list">
+                <div class="token-row">
+                  <div class="token-label">官方含义</div>
+                  <div>内容应相对 safe area 与 layout guides 对齐，而不是死贴屏幕边缘。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">前端落地</div>
+                  <div>页面容器、顶部导航、底部操作区都应预留安全边距接口；移动端优先基于安全区 inset 做 padding。</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card">
+              <h4>macOS 特别约束</h4>
+              <p>Apple 明确提醒：不要把关键控件或核心信息放在窗口底部，也不要把内容放进顶部摄像头区域。</p>
+              <div class="token-list">
+                <div class="token-row">
+                  <div class="token-label">原因</div>
+                  <div>桌面用户常把窗口底部移出屏幕，顶部还有可能遇到 camera housing 兼容问题。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">前端落地</div>
+                  <div>桌面应用里，主操作优先放顶部栏、侧栏或右侧检查器，不把保存、确认、切换类关键动作只放到底部。</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card">
+              <h4>iOS / iPadOS 适配</h4>
+              <p>Apple 建议支持方向变化，并强调按钮、内容和状态栏都要与系统边距与设备曲率保持协调。</p>
+              <div class="token-list">
+                <div class="token-row">
+                  <div class="token-label">官方含义</div>
+                  <div>避免默认做满宽按钮；内容全屏时也要适配 Dynamic Island、圆角和系统栏。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">前端落地</div>
+                  <div>移动端组件不默认撑满 viewport 宽度，主按钮与卡片容器都保留左右呼吸空间。</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card">
+              <h4>Toolbar 分区规则</h4>
+              <p>Apple 对工具栏的 leading、center、trailing 三段分区讲得很具体，这一块可以直接成为桌面产品头部布局规范。</p>
+              <div class="token-list">
+                <div class="token-row">
+                  <div class="token-label">Leading</div>
+                  <div>返回、显示/隐藏侧栏、标题、文档级菜单等稳定定位在前侧。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">Center</div>
+                  <div>常用控制可置中，且在 macOS / iPadOS 下可允许自定义和进入系统溢出菜单。</div>
+                </div>
+                <div class="token-row">
+                  <div class="token-label">Trailing</div>
+                  <div>搜索、检查器入口、更多菜单和主操作应固定在尾侧，确保窄宽度下仍可见。</div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <p class="spec-note">
+            其中 “chrome / content 分层”、“关键操作不要只放窗口底部”、“工具栏三段式分区” 都可以直接进我们的布局规范，不需要等后续 token 补齐。
+          </p>
+        </div>
+
+        <div class="subsection" id="layout-rules">
+          <h3>必须写进前端的 Layout 约束</h3>
+          <p>
+            下面这些不是“可选建议”，而是布局规范的最低约束。只要违背其中一条，页面就很容易看起来像信息堆砌，而不是 Apple 式组织。
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>规范字段</th>
+                  <th>建议写法</th>
+                  <th>来源说明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mono">layout.chrome-separation</td>
+                  <td>控制区必须与内容区形成明确层次，可通过材质、描边、分区背景或 scroll edge effect 建立边界。</td>
+                  <td>来自 Layout and Organization 对控件/内容分层的要求。</td>
+                </tr>
+                <tr>
+                  <td class="mono">layout.reading-order</td>
+                  <td>关键信息与主操作优先布局在上方与 leading 侧，并兼容 RTL 阅读顺序。</td>
+                  <td>来自 Layout and Organization 对阅读顺序和信息优先级的描述。</td>
+                </tr>
+                <tr>
+                  <td class="mono">layout.safe-area</td>
+                  <td>所有页面容器必须相对 safe area 布局，不能把内容硬贴设备边界和系统栏。</td>
+                  <td>来自 Layout 的 guides and safe areas 章节。</td>
+                </tr>
+                <tr>
+                  <td class="mono">layout.alignment-lines</td>
+                  <td>同一任务流中的标题、字段、值、辅助操作必须共享稳定对齐线；层级变化用缩进表达，不靠随意位移。</td>
+                  <td>来自 Layout and Organization 对 alignment 与 hierarchy 的要求。</td>
+                </tr>
+                <tr>
+                  <td class="mono">layout.progressive-disclosure</td>
+                  <td>任何被折叠、截断、分页或横向滚动的内容都必须给出继续浏览的明确线索。</td>
+                  <td>来自 Layout and Organization 对 progressive disclosure 的要求。</td>
+                </tr>
+                <tr>
+                  <td class="mono">layout.toolbar-zones</td>
+                  <td>工具栏默认采用 leading / center / trailing 分区，不混淆导航、普通操作和主操作。</td>
+                  <td>来自 Toolbars 对 item groupings 的说明。</td>
+                </tr>
+                <tr>
+                  <td class="mono">layout.bottom-critical-actions</td>
+                  <td>桌面端关键动作不能只放窗口底部，必须在顶部或稳定可见区域提供入口。</td>
+                  <td>来自 macOS 平台注意事项。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="icons-overview">
+        <h2>Icons 落地表</h2>
+        <p class="section-intro">
+          这里现在只服务一个目标：快速挑到合适的 Apple 图标。长规则不再铺开显示，只保留 AI 和后续自己复用时真正需要的索引信息。
+        </p>
+
+        <div class="subsection" id="icons-pick">
+          <h3>快速挑选</h3>
+          <div class="icon-compact-grid">
+            <article class="card">
+              <div class="card-header">
+                <h3>规则速记</h3>
+                <span class="tag status-partial">悬浮展开</span>
+              </div>
+              <p>先看短标签，只有在你需要的时候再悬浮查看说明。这样人读起来不会被大段文字打断，但下一位 AI 仍然能从文档里拿到规则。</p>
+              <div class="mini-rule-row">
+                <div class="mini-rule"><a href="https://developer.apple.com/design/human-interface-guidelines/icons" target="_blank" rel="noreferrer">单一概念</a><span class="hint">i</span><div class="tooltip">一个图标只表达一个动作或对象，不把多个动作塞进同一符号里。来源：Apple Icons 指南。</div></div>
+                <div class="mini-rule"><a href="https://developer.apple.com/design/human-interface-guidelines/icons" target="_blank" rel="noreferrer">统一视觉</a><span class="hint">i</span><div class="tooltip">同一产品里的图标应保持一致的线粗、视角、基线和细节密度。来源：Apple Icons 指南。</div></div>
+                <div class="mini-rule"><a href="https://developer.apple.com/design/human-interface-guidelines/sf-symbols" target="_blank" rel="noreferrer">优先系统变体</a><span class="hint">i</span><div class="tooltip">选中、禁用、强调态优先用 fill、slash、badge、circle 等系统变体，不要另画新图标。来源：SF Symbols 变体体系。</div></div>
+                <div class="mini-rule"><a href="https://developer.apple.com/design/human-interface-guidelines/sf-symbols" target="_blank" rel="noreferrer">与文字对齐</a><span class="hint">i</span><div class="tooltip">SF Symbols 的字重和比例与 San Francisco 字体体系配合设计，图标尺寸要和文字一起看。来源：SF Symbols 权重与比例。</div></div>
+                <div class="mini-rule"><a href="https://developer.apple.com/design/human-interface-guidelines/icons" target="_blank" rel="noreferrer">可着色</a><span class="hint">i</span><div class="tooltip">系统图标应保持可着色能力，避免在源图里写死复杂色彩效果。来源：Apple Icons 与 SF Symbols 渲染规则。</div></div>
+                <div class="mini-rule"><a href="https://developer.apple.com/sf-symbols/" target="_blank" rel="noreferrer">先用 App 挑</a><span class="hint">i</span><div class="tooltip">你已经安装了 SF Symbols App。挑图标时先在 App 看长相和变体，再把名字告诉我，是最快路径。来源：SF Symbols 官方 App。</div></div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <h3>去哪找</h3>
+                <span class="tag status-available">AI 索引</span>
+              </div>
+              <p>如果后续你或下一个 AI 需要继续扩充，可以先看这里，不用回忆整套 Apple 文档结构。</p>
+              <div class="quick-links">
+                <div class="quick-link"><strong><a href="https://developer.apple.com/sf-symbols/" target="_blank" rel="noreferrer">本机 SF Symbols App</a></strong><span>用于人类挑图标。看长相、看变体、查准确名称。这里是官方下载入口。</span></div>
+                <div class="quick-link"><strong><a href="#icons-overview">本地 HTML 索引</a></strong><span>用于 AI 和你快速回看分类、名称、规则摘要和常用图标预览。后续新增图标也会继续沉到这里。</span></div>
+                <div class="quick-link"><strong><a href="https://developer.apple.com/design/human-interface-guidelines/icons" target="_blank" rel="noreferrer">Apple 官方页面</a></strong><span>只在需要完整上下文、更新说明或下载资源时再回去看。图标规则看 Icons，系统符号看 SF Symbols。</span></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="icon-tabs" role="tablist" aria-label="Icon categories">
+            <button class="icon-tab is-active" data-target="icon-panel-navigation" role="tab" aria-selected="true">Navigation</button>
+            <button class="icon-tab" data-target="icon-panel-actions" role="tab" aria-selected="false">Actions</button>
+            <button class="icon-tab" data-target="icon-panel-status" role="tab" aria-selected="false">Status</button>
+            <button class="icon-tab" data-target="icon-panel-calendar" role="tab" aria-selected="false">Calendar / Time</button>
+            <button class="icon-tab" data-target="icon-panel-communication" role="tab" aria-selected="false">Communication</button>
+            <button class="icon-tab" data-target="icon-panel-media" role="tab" aria-selected="false">Media / Motion</button>
+          </div>
+
+          <div id="icon-panel-navigation" class="icon-panel is-active">
+            <div class="symbol-grid">
+                <div class="symbol-card"><img src="./icon-assets/navigation/sidebar_left.png" alt="sidebar.left" /><strong><a href="https://developer.apple.com/design/human-interface-guidelines/toolbars" target="_blank" rel="noreferrer">sidebar.left</a></strong><span>Sidebar</span><span>侧边栏与布局</span></div>
+                <div class="symbol-card"><img src="./icon-assets/navigation/magnifyingglass.png" alt="magnifyingglass" /><strong><a href="https://developer.apple.com/design/human-interface-guidelines/icons" target="_blank" rel="noreferrer">magnifyingglass</a></strong><span>Search</span><span>搜索</span></div>
+                <div class="symbol-card"><img src="./icon-assets/navigation/slider_horizontal_3.png" alt="slider.horizontal.3" /><strong><a href="https://developer.apple.com/design/human-interface-guidelines/icons" target="_blank" rel="noreferrer">slider.horizontal.3</a></strong><span>Filter</span><span>筛选与调节</span></div>
+              <div class="symbol-card"><img src="./icon-assets/navigation/square_grid_2x2.png" alt="square.grid.2x2" /><strong>square.grid.2x2</strong><span>Grid</span><span>网格视图</span></div>
+              <div class="symbol-card"><img src="./icon-assets/navigation/list_bullet.png" alt="list.bullet" /><strong>list.bullet</strong><span>List</span><span>列表视图</span></div>
+              <div class="symbol-card"><img src="./icon-assets/navigation/ellipsis_circle.png" alt="ellipsis.circle" /><strong>ellipsis.circle</strong><span>More</span><span>更多操作</span></div>
+            </div>
+          </div>
+
+          <div id="icon-panel-actions" class="icon-panel">
+            <div class="symbol-grid">
+              <div class="symbol-card"><img src="./icon-assets/actions/plus.png" alt="plus" /><strong>plus</strong><span>Add</span><span>新建</span></div>
+              <div class="symbol-card"><img src="./icon-assets/actions/plus_circle_fill.png" alt="plus.circle.fill" /><strong>plus.circle.fill</strong><span>Add Circle</span><span>强调新建</span></div>
+              <div class="symbol-card"><img src="./icon-assets/actions/pencil.png" alt="pencil" /><strong>pencil</strong><span>Edit</span><span>编辑</span></div>
+              <div class="symbol-card"><img src="./icon-assets/actions/trash.png" alt="trash" /><strong>trash</strong><span>Delete</span><span>删除</span></div>
+              <div class="symbol-card"><img src="./icon-assets/actions/square_and_arrow_up.png" alt="square.and.arrow.up" /><strong>square.and.arrow.up</strong><span>Share</span><span>分享</span></div>
+              <div class="symbol-card"><img src="./icon-assets/actions/checkmark_circle.png" alt="checkmark.circle" /><strong>checkmark.circle</strong><span>Confirm</span><span>确认与完成</span></div>
+            </div>
+          </div>
+
+          <div id="icon-panel-status" class="icon-panel">
+            <div class="symbol-grid">
+              <div class="symbol-card"><img src="./icon-assets/status/circle.png" alt="circle" /><strong>circle</strong><span>Empty</span><span>未完成</span></div>
+              <div class="symbol-card"><img src="./icon-assets/status/checkmark_circle_fill.png" alt="checkmark.circle.fill" /><strong>checkmark.circle.fill</strong><span>Done</span><span>已完成</span></div>
+              <div class="symbol-card"><img src="./icon-assets/status/exclamationmark_circle.png" alt="exclamationmark.circle" /><strong>exclamationmark.circle</strong><span>Warning</span><span>提醒与异常</span></div>
+              <div class="symbol-card"><img src="./icon-assets/status/clock_badge_exclamationmark.png" alt="clock.badge.exclamationmark" /><strong>clock.badge.exclamationmark</strong><span>Deadline</span><span>截止与超时</span></div>
+              <div class="symbol-card"><img src="./icon-assets/status/flag.png" alt="flag" /><strong>flag</strong><span>Flag</span><span>优先级</span></div>
+              <div class="symbol-card"><img src="./icon-assets/status/tag.png" alt="tag" /><strong>tag</strong><span>Tag</span><span>标签</span></div>
+            </div>
+          </div>
+
+          <div id="icon-panel-calendar" class="icon-panel">
+            <div class="symbol-grid">
+                <div class="symbol-card"><img src="./icon-assets/calendar/calendar.png" alt="calendar" /><strong><a href="https://developer.apple.com/design/human-interface-guidelines/icons" target="_blank" rel="noreferrer">calendar</a></strong><span>Calendar</span><span>日历</span></div>
+                <div class="symbol-card"><img src="./icon-assets/calendar/calendar_badge_clock.png" alt="calendar.badge.clock" /><strong><a href="https://developer.apple.com/design/human-interface-guidelines/sf-symbols" target="_blank" rel="noreferrer">calendar.badge.clock</a></strong><span>Schedule</span><span>安排与计划</span></div>
+                <div class="symbol-card"><img src="./icon-assets/calendar/clock.png" alt="clock" /><strong><a href="https://developer.apple.com/design/human-interface-guidelines/icons" target="_blank" rel="noreferrer">clock</a></strong><span>Clock</span><span>时间</span></div>
+              <div class="symbol-card"><img src="./icon-assets/calendar/alarm.png" alt="alarm" /><strong>alarm</strong><span>Alarm</span><span>提醒</span></div>
+              <div class="symbol-card"><img src="./icon-assets/calendar/bell.png" alt="bell" /><strong>bell</strong><span>Bell</span><span>通知</span></div>
+              <div class="symbol-card"><img src="./icon-assets/calendar/bell_badge.png" alt="bell.badge" /><strong>bell.badge</strong><span>Reminder</span><span>提醒事项</span></div>
+            </div>
+          </div>
+
+          <div id="icon-panel-communication" class="icon-panel">
+            <div class="symbol-grid">
+              <div class="symbol-card"><img src="./icon-assets/communication/text_bubble.png" alt="text.bubble" /><strong>text.bubble</strong><span>Comment</span><span>消息与备注</span></div>
+              <div class="symbol-card"><img src="./icon-assets/communication/text_bubble_fill.png" alt="text.bubble.fill" /><strong>text.bubble.fill</strong><span>Comment Fill</span><span>强调消息</span></div>
+              <div class="symbol-card"><img src="./icon-assets/communication/quote_bubble.png" alt="quote.bubble" /><strong>quote.bubble</strong><span>Quote</span><span>引用</span></div>
+              <div class="symbol-card"><img src="./icon-assets/communication/paperclip.png" alt="paperclip" /><strong>paperclip</strong><span>Attachment</span><span>附件</span></div>
+              <div class="symbol-card"><img src="./icon-assets/communication/link.png" alt="link" /><strong>link</strong><span>Link</span><span>链接</span></div>
+              <div class="symbol-card"><img src="./icon-assets/communication/person_crop_circle.png" alt="person.crop.circle" /><strong>person.crop.circle</strong><span>Profile</span><span>用户与身份</span></div>
+            </div>
+          </div>
+
+          <div id="icon-panel-media" class="icon-panel">
+            <div class="symbol-grid">
+              <div class="symbol-card"><img src="./icon-assets/media/play_circle.png" alt="play.circle" /><strong>play.circle</strong><span>Play</span><span>播放</span></div>
+              <div class="symbol-card"><img src="./icon-assets/media/pause_circle.png" alt="pause.circle" /><strong>pause.circle</strong><span>Pause</span><span>暂停</span></div>
+              <div class="symbol-card"><img src="./icon-assets/media/stop_circle.png" alt="stop.circle" /><strong>stop.circle</strong><span>Stop</span><span>停止</span></div>
+              <div class="symbol-card"><img src="./icon-assets/media/timer.png" alt="timer" /><strong>timer</strong><span>Timer</span><span>计时器</span></div>
+              <div class="symbol-card"><img src="./icon-assets/media/timer_circle.png" alt="timer.circle" /><strong>timer.circle</strong><span>Timer Circle</span><span>专注计时</span></div>
+              <div class="symbol-card"><img src="./icon-assets/media/waveform.png" alt="waveform" /><strong>waveform</strong><span>Waveform</span><span>音频与动态</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="icons-app-spec">
+          <h3>App Icon 生产规格</h3>
+          <p>
+            App Icon 这部分 Apple 给的是很具体的生产规则，包括图层、形状、平台尺寸和可选外观。它比单纯“应用图标规范”更接近真实交付标准。
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>平台</th>
+                  <th>布局尺寸</th>
+                  <th>系统最终形状</th>
+                  <th>图层 / 外观要求</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>iOS / iPadOS / macOS</td>
+                  <td class="mono">1024 × 1024 px</td>
+                  <td>系统裁成圆角方形</td>
+                  <td>Layered；支持 default、dark、clear、tinted 等外观变体。</td>
+                </tr>
+                <tr>
+                  <td>tvOS</td>
+                  <td class="mono">800 × 480 px</td>
+                  <td>系统裁成圆角横向矩形</td>
+                  <td>2 到 5 层的 parallax 图标；焦点态会裁边，需保留 safe zone。</td>
+                </tr>
+                <tr>
+                  <td>visionOS</td>
+                  <td class="mono">1024 × 1024 px</td>
+                  <td>系统裁成圆形</td>
+                  <td>Layered 3D；背景和上层之间会通过阴影与高光增强立体感。</td>
+                </tr>
+                <tr>
+                  <td>watchOS</td>
+                  <td class="mono">1088 × 1088 px</td>
+                  <td>系统裁成圆形</td>
+                  <td>Layered；避免纯黑背景，以免和显示背景混在一起。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="spec-note">
+            这些尺寸和形状是 Apple 官方明确给出的生产规格，可直接写进品牌资产或应用发布规范里。
+          </div>
+        </div>
+
+        <div class="subsection" id="icons-app-rules">
+          <h3>App Icon 设计约束</h3>
+          <p>
+            这一层更像“设计制作红线”。虽然不是 token，但它们对后续产出是否像 Apple 平台原生体验影响很大。
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>约束项</th>
+                  <th>Apple 公开内容</th>
+                  <th>我们规范里应怎么写</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>图层输入形状</td>
+                  <td>不要预先裁圆角或做遮罩，提供平方或矩形图层，让系统自行 masking。</td>
+                  <td>导出规范明确禁止手工裁成最终轮廓，否则会破坏系统高光和边缘品质。</td>
+                </tr>
+                <tr>
+                  <td>前景边缘</td>
+                  <td>前景图层应保持清晰边缘，避免柔边和羽化。</td>
+                  <td>App icon 的前景对象禁止使用模糊边缘作为主体轮廓。</td>
+                </tr>
+                <tr>
+                  <td>背景设计</td>
+                  <td>背景应突出前景，可优先使用纯色或从上到下的渐变；若导入背景图，应 full-bleed 且不透明。</td>
+                  <td>背景层优先用简洁渐变或纯色，避免复杂纹理把主体吃掉。</td>
+                </tr>
+                <tr>
+                  <td>文本使用</td>
+                  <td>只有在品牌或体验必须时才放文字，且避免“Play”“New”这类说明性词汇。</td>
+                  <td>应用图标默认不放文字；如确需字母，仅允许品牌识别级最小文本。</td>
+                </tr>
+                <tr>
+                  <td>避免照片与 UI 截图</td>
+                  <td>照片细节过多，不适合多外观与分层；不要复制标准 UI 组件或使用应用截图。</td>
+                  <td>品牌资产规范里应明确：图标主体必须是图形化抽象，不接受截图式方案。</td>
+                </tr>
+                <tr>
+                  <td>系统处理视觉效果</td>
+                  <td>高光、阴影、模糊、斜角等应交给系统处理，不要在源图层里提前做死。</td>
+                  <td>导出层保持尽量干净，把立体感交给平台，不靠静态特效堆砌。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="note-callout">
+          `Icons` 这一章现在已经不只是“去哪看图标”，而是把 Apple 可直接拿到的图标规则拆成了三类前端可复用内容：
+          `interface icon 使用规则`、`SF Symbols 系统语言`、`App icon 生产规格`。后续如果你要继续补，我们更适合补的是“我们自己的业务图标尺寸体系”和“设计稿导出命名规范”，而不是再回去找 Apple 外链。
+        </div>
+      </section>
+
+      <section class="section" id="cards">
+        <h2>官方内容采集卡片</h2>
+        <p class="section-intro">
+          每一张卡片都对应一个以后可复用的设计规范章节。你可以先看苹果给了多少，再决定哪些模块要补第三方体系。
+        </p>
+        <div class="grid">
+          <article class="card">
+            <div class="card-header">
+              <h3>Foundations</h3>
+              <span class="tag status-available">可直接采集</span>
+            </div>
+            <p>
+              苹果在 HIG 首页和 macOS 设计入口里给了非常明确的平台基础原则，这部分适合直接提炼成我们自己规范的“设计原则”章节。
+            </p>
+            <div class="block-title">可采集内容</div>
+            <ul>
+              <li>Hierarchy、Harmony、Consistency 三个总原则。</li>
+              <li>macOS 的大屏、多窗口、键盘和高精度输入特性。</li>
+              <li>支持菜单栏、工具栏、窗口自定义、快捷键的设计预期。</li>
+            </ul>
+            <div class="block-title">官方链接</div>
+            <div class="links">
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/">Human Interface Guidelines</a></strong>
+                <span>苹果设计总入口，适合作为总纲。</span>
+              </div>
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/designing-for-macos">Designing for macOS</a></strong>
+                <span>对桌面应用最有价值的入口，包含平台特征和最佳实践。</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h3>Color</h3>
+              <span class="tag status-partial">部分可采集</span>
+            </div>
+            <p>
+              苹果给的是“如何用颜色”的规范，不是完整的设计 token 表。它适合指导语义层，不适合直接作为全套原子色板。
+            </p>
+            <div class="block-title">可采集内容</div>
+            <ul>
+              <li>优先使用系统色，使界面自动适配外观、vibrancy 和辅助功能设置。</li>
+              <li>颜色应服务于沟通、状态反馈、品牌识别和信息层次。</li>
+              <li>避免同色异义，也避免只靠颜色传递信息。</li>
+            </ul>
+            <div class="block-title">缺失内容</div>
+            <ul>
+              <li>没有一张完整公开表列出背景、文字、描边、填充的全部 token 数值。</li>
+              <li>缺少像 Arco 那样可直接导入工程的 palette 系统。</li>
+            </ul>
+            <div class="block-title">官方链接</div>
+            <div class="links">
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/foundations/color/">Color</a></strong>
+                <span>颜色原则、系统色思路和使用建议。</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h3>Typography</h3>
+              <span class="tag status-partial">部分可采集</span>
+            </div>
+            <p>
+              苹果对字体资源和平台文本样式公开得比颜色更完整。能拿到 iPhone / iPadOS 的 Dynamic Type 表、macOS 的 built-in text styles、tracking 和系统字体 API，但拿不到一整套跨组件 token。
+            </p>
+            <div class="block-title">可采集内容</div>
+            <ul>
+              <li>SF Pro 是系统 UI 字体，SF Mono 和 New York 也有官方资源。</li>
+              <li>Typography 页面给了 iPhone / iPadOS Dynamic Type 与 macOS built-in text styles 官方表。</li>
+              <li>Apple 同时公开了 tracking values 和 UIKit / AppKit / SwiftUI 字体接口。</li>
+            </ul>
+            <div class="block-title">缺失内容</div>
+            <ul>
+              <li>没有一个按组件和业务场景拆好的 token 表可直接复用到产品。</li>
+              <li>没有把按钮、表格、导航栏、Inspector 这些组件文本自动整理成产品规范。</li>
+            </ul>
+            <div class="block-title">官方链接</div>
+            <div class="links">
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/typography">Typography</a></strong>
+                <span>平台排版建议和部分 tracking 数据。</span>
+              </div>
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/fonts/">Fonts</a></strong>
+                <span>SF Pro、SF Mono、New York 等字体资源下载入口。</span>
+              </div>
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/resources/">Apple Design Resources</a></strong>
+                <span>设计资源总入口，偏资源下载，不是纯文字规范。</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h3>Materials / Glass</h3>
+              <span class="tag status-partial">部分可采集</span>
+            </div>
+            <p>
+              苹果公开讲了材质层次、vibrancy、背景混合模式和滚动边缘效果，这对我们定义“玻璃质感章节”很有用。但它仍不是一份可抄参数表。
+            </p>
+            <div class="block-title">可采集内容</div>
+            <ul>
+              <li>macOS 提供多种标准 materials，并建议按语义用途使用。</li>
+              <li>可参考 vibrancy 与 NSVisualEffectView 的 blending mode。</li>
+              <li>Scroll edge effect 在 iOS、iPadOS、macOS 中已成为控制区和内容区过渡的重要语言。</li>
+            </ul>
+            <div class="block-title">缺失内容</div>
+            <ul>
+              <li>没有统一 blur 值、透明度值、边框 alpha 或阴影参数表。</li>
+              <li>没有“Apple 玻璃 token”可直接拿来做设计系统。</li>
+            </ul>
+            <div class="block-title">官方链接</div>
+            <div class="links">
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/materials">Materials</a></strong>
+                <span>材质用途、平台差异和 vibrancy 指导。</span>
+              </div>
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/scroll-views">Scroll views</a></strong>
+                <span>包含 scroll edge effect 对 macOS 和 iPadOS 的描述。</span>
+              </div>
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/documentation/appkit/nsvisualeffectview">NSVisualEffectView</a></strong>
+                <span>开发实现侧入口，帮助理解材质和玻璃语义的落地方式。</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h3>Layout</h3>
+              <span class="tag status-available">可直接采集</span>
+            </div>
+            <p>
+              布局和信息层次是苹果公开资料里最完整的一块之一。虽然它不直接给 spacing token，但原则足够明确，适合转成我们自己的布局规范。
+            </p>
+            <div class="block-title">可采集内容</div>
+            <ul>
+              <li>阅读顺序、视觉层次、对齐、渐进披露。</li>
+              <li>safe area、layout guides、适配多窗口与不同设备环境。</li>
+              <li>macOS 特别提醒：避免把关键控件放在窗口底部，避免内容进入摄像头区域。</li>
+            </ul>
+            <div class="block-title">缺失内容</div>
+            <ul>
+              <li>缺少统一 spacing scale，例如 4/8/12/16 的系统化建议。</li>
+            </ul>
+            <div class="block-title">官方链接</div>
+            <div class="links">
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/layout">Layout</a></strong>
+                <span>布局原则、safe area 与平台适配总页。</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h3>Icons</h3>
+              <span class="tag status-available">可直接采集</span>
+            </div>
+            <p>
+              图标部分苹果公开得很充分，尤其适合建立“图标系统来源与规则”章节。这里最大的价值不是 token，而是图标语言的边界和资源来源。
+            </p>
+            <div class="block-title">可采集内容</div>
+            <ul>
+              <li>App icons 的形状、遮罩、平台差异、色彩空间和尺寸规格。</li>
+              <li>Interface icons 与 SF Symbols 的使用原则。</li>
+              <li>图标应表达单一概念，支持系统着色与平台一致性。</li>
+            </ul>
+            <div class="block-title">官方链接</div>
+            <div class="links">
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/app-icons">App icons</a></strong>
+                <span>应用图标尺寸、形态、平台规格。</span>
+              </div>
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/icons">Icons</a></strong>
+                <span>界面图标与 SF Symbols 使用原则。</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h3>Component Patterns</h3>
+              <span class="tag status-partial">部分可采集</span>
+            </div>
+            <p>
+              苹果的组件页是“分散的独立说明”，而不是单一组件系统文档。对我们最有价值的是工具栏、按钮、搜索栏、滚动视图、菜单这几类页面。
+            </p>
+            <div class="block-title">可采集内容</div>
+            <ul>
+              <li>Toolbar 的分区原则，leading / center / trailing 的布局逻辑。</li>
+              <li>Search field 的位置策略，尤其是 macOS 与 iPadOS 的侧边栏/顶部放置建议。</li>
+              <li>Buttons、Menus、Scroll views 的交互预期和可用性原则。</li>
+            </ul>
+            <div class="block-title">缺失内容</div>
+            <ul>
+              <li>没有统一的控件尺寸、间距、圆角、状态色配置表。</li>
+              <li>很多组件需要 JavaScript 页面，文本抓取并不总是完整。</li>
+            </ul>
+            <div class="block-title">官方链接</div>
+            <div class="links">
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/toolbars">Toolbars</a></strong>
+                <span>工具栏区域分组和操作优先级。</span>
+              </div>
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/search-fields">Search fields</a></strong>
+                <span>搜索框放置策略，适合参考你的侧边栏/全局搜索设计。</span>
+              </div>
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/buttons">Buttons</a></strong>
+                <span>按钮风格、角色和内容组合原则。</span>
+              </div>
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/menus">Menus</a></strong>
+                <span>菜单行为和组织方式。</span>
+              </div>
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/scroll-views">Scroll views</a></strong>
+                <span>滚动区行为和 scroll edge effect。</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h3>Accessibility</h3>
+              <span class="tag status-available">可直接采集</span>
+            </div>
+            <p>
+              无障碍不是 token 层，但它必须成为设计规范中的强约束。苹果在这部分给出了很扎实的原则，适合作为规范中的“全局要求”章节。
+            </p>
+            <div class="block-title">可采集内容</div>
+            <ul>
+              <li>界面必须直观、可感知、可适应。</li>
+              <li>不要只靠单一感官通道传递信息。</li>
+              <li>应考虑系统辅助功能与用户个性化设置。</li>
+            </ul>
+            <div class="block-title">官方链接</div>
+            <div class="links">
+              <div class="link-card">
+                <strong><a href="https://developer.apple.com/design/human-interface-guidelines/accessibility/">Accessibility</a></strong>
+                <span>适合作为规范里的全局要求。</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="gaps">
+        <h2>明确缺失的 Apple 规范内容</h2>
+        <p class="section-intro">
+          这部分是后面最需要你补外部参考的地方。也就是说，不是我没找到，而是苹果公开资料本身就没有给出完整可复用结果。
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>缺失模块</th>
+                <th>当前状态</th>
+                <th>为什么缺</th>
+                <th>后续建议补法</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>完整原子色板</td>
+                <td>缺失</td>
+                <td>苹果更强调系统色和语义色，不公开一整套面向设计系统的 palette 表。</td>
+                <td>后续可用你指定的第三方设计系统或我们自建 palette 来补。</td>
+              </tr>
+              <tr>
+                <td>统一字号 token 表</td>
+                <td>缺失</td>
+                <td>苹果公开的是字体资源和排版原则，不是跨组件 token 清单。</td>
+                <td>后续从 Apple 字体倾向出发，自建标题、正文、标签等级。</td>
+              </tr>
+              <tr>
+                <td>Spacing 系统</td>
+                <td>缺失</td>
+                <td>苹果讲布局原则，不给 4/8/12/16 这种工程化 spacing scale。</td>
+                <td>需要我们自己定义一套平台友好的 spacing token。</td>
+              </tr>
+              <tr>
+                <td>Radius / Shadow / Layer token</td>
+                <td>缺失</td>
+                <td>苹果偏向最终效果和系统组件，不公开完整视觉参数表。</td>
+                <td>必须自建，后续可参考其他设计系统做结构化。</td>
+              </tr>
+              <tr>
+                <td>玻璃参数 token</td>
+                <td>缺失</td>
+                <td>苹果公开材质原则和 API 语义，不公开 blur、opacity、stroke 的统一数值体系。</td>
+                <td>先保留 Apple 语义，再由我们根据产品风格补成参数化 token。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="footnote">
+          判断标准：只有当苹果公开页面能稳定提供明确结构、语义范围和足够多的可转译信息时，我才标记为“可直接采集”。如果只提供原则不给数值，我统一记为“部分可采集”。
+        </p>
+      </section>
+
+      <section class="section" id="next-steps">
+        <h2>下一步建议</h2>
+        <p class="section-intro">
+          现在这个网页已经把苹果能拿到的设计规范底稿整理好了。接下来最合理的动作不是继续硬找 Apple token，而是补那些苹果明显缺失但我们必须有的体系。
+        </p>
+        <ul>
+          <li>先把这页作为 `Apple 基线文档` 固定下来。</li>
+          <li>你再给我补第三方来源时，我只填补缺失章节，不重做结构。</li>
+          <li>优先补 Color palette、Typography scale、Spacing、Radius、Shadow、Layer、Motion。</li>
+          <li>等这些补完后，再生成真正可复用的 `Design Token Spec v1`。</li>
+        </ul>
+      </section>
+        </div>
+      </div>
+    </main>
+    <script>
+      (() => {
+        document.querySelectorAll(".color-chip").forEach((chip) => {
+          const monos = chip.querySelectorAll(".value-stack .mono");
+          if (!monos.length) return;
+
+          const firstLine = monos[0].textContent.trim();
+          if (/^rgba\(/i.test(firstLine) && monos[1]) {
+            const match = firstLine.match(/rgba\(\s*[\d.]+\s*,\s*[\d.]+\s*,\s*[\d.]+\s*,\s*([\d.]+)\s*\)/i);
+            if (match) {
+              const alpha = Math.round(Number(match[1]) * 1000) / 10;
+              monos[1].textContent = `Alpha ${alpha}%`;
+            }
+          }
+
+          chip.tabIndex = 0;
+          chip.setAttribute("role", "button");
+          chip.setAttribute("title", "点击复制变量名和色值");
+        });
+
+        const toast = document.createElement("div");
+        toast.className = "copy-toast";
+        document.body.appendChild(toast);
+
+        let toastTimer = null;
+        const showToast = (text) => {
+          toast.textContent = text;
+          toast.classList.add("show");
+          window.clearTimeout(toastTimer);
+          toastTimer = window.setTimeout(() => {
+            toast.classList.remove("show");
+          }, 1600);
+        };
+
+        const copyChipValue = async (chip) => {
+          const row = chip.closest("tr");
+          const apiNode = row?.querySelector("td:nth-child(2)");
+          const nameNode = row?.querySelector("td:first-child .swatch-row span:last-child");
+          const valueNode = chip.querySelector(".value-stack .mono");
+          const name = apiNode?.textContent?.trim() || nameNode?.textContent?.trim() || "";
+          const value = valueNode?.textContent?.trim() || "";
+          const payload = name && value ? `${name} ${value}` : value || name;
+
+          if (!payload) return;
+
+          try {
+            await navigator.clipboard.writeText(payload);
+            chip.classList.add("copied");
+            window.setTimeout(() => chip.classList.remove("copied"), 800);
+            showToast(`已复制：${payload}`);
+          } catch (error) {
+            showToast("复制失败，请手动复制");
+          }
+        };
+
+        document.addEventListener("click", (event) => {
+          const chip = event.target.closest(".color-chip");
+          if (!chip) return;
+          copyChipValue(chip);
+        });
+
+        document.addEventListener("keydown", (event) => {
+          const chip = event.target.closest?.(".color-chip");
+          if (!chip) return;
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            copyChipValue(chip);
+          }
+        });
+
+        const iconTabs = Array.from(document.querySelectorAll(".icon-tab"));
+        const iconPanels = Array.from(document.querySelectorAll(".icon-panel"));
+
+        const activateIconPanel = (targetId) => {
+          iconTabs.forEach((tab) => {
+            const active = tab.dataset.target === targetId;
+            tab.classList.toggle("is-active", active);
+            tab.setAttribute("aria-selected", active ? "true" : "false");
+          });
+
+          iconPanels.forEach((panel) => {
+            panel.classList.toggle("is-active", panel.id === targetId);
+          });
+        };
+
+        iconTabs.forEach((tab) => {
+          tab.addEventListener("click", () => activateIconPanel(tab.dataset.target));
+        });
+
+        const createTabGroup = (tabSelector, panelSelector) => {
+          const tabs = Array.from(document.querySelectorAll(tabSelector));
+          const panels = Array.from(document.querySelectorAll(panelSelector));
+          if (!tabs.length || !panels.length) return;
+
+          const activatePanel = (targetId) => {
+            tabs.forEach((tab) => {
+              const active = tab.dataset.target === targetId;
+              tab.classList.toggle("is-active", active);
+              tab.setAttribute("aria-selected", active ? "true" : "false");
+            });
+
+            panels.forEach((panel) => {
+              panel.classList.toggle("is-active", panel.id === targetId);
+            });
+          };
+
+          tabs.forEach((tab) => {
+            tab.addEventListener("click", () => activatePanel(tab.dataset.target));
+          });
+        };
+
+        createTabGroup(".spec-tab", ".spec-panel");
+      })();
+    </script>
+  </body>
+</html>
